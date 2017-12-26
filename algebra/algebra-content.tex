@@ -1,0 +1,373 @@
+\setcounter{section}{1}
+
+\begin{prb}[2011 AIME II-5]
+The sum of the first $2011$ terms of a geometric sequence is $200$. The sum of
+the first $4022$ terms is $380$. What is the sum of the first $6033$ terms?
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+The sum of the second $2011$ terms is $380 - 200 = 180$. We can write this as
+\[ 180 = ar^{2011} + ar^{2012} + \cdots + ar^{4021} = r^{2011} (a + ar + \cdots
++ ar^{2010}) = r^{2011} \cdot 200 . \]
+Compute $r^{2011} = \frac{9}{10}$ and notice the same thing can be done for the
+last $2011$ terms, but with $r^{4022} = (r^{2011})^2$. Thus the sum of the last
+$2011$ terms is $\frac{9}{10} \cdot 180 = 162$, and $200 + 180 + 162 =
+\boxed{542}$.
+\end{proof}
+\fi
+
+\begin{prb}[2004 AIME I-12]
+Let $S$ be the set of ordered pairs $(x, y)$ such that $0 < x \leq 1$ and $0 < y
+\leq 1$ and $\left\lfloor \log_2 \left( \frac{1}{x} \right) \right\rfloor$ and
+$\left\lfloor \log_5 \left( \frac{1}{y} \right) \right\rfloor$ are both even.
+The area of the graph of $S$ is $\frac{m}{n}$ where $m, n$ are two relatively
+prime positive integers. Find $m + n$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Notice how we require $\left\lfloor \log_2 \left( \frac{1}{x} \right)
+\right\rfloor$ to lie in the intervals $[0, 1), [2, 3), \dots$, and similarly
+for $y$. In particular, we have $x \in \left( \frac{1}{2}, 1 \right] \cup \left(
+\frac{1}{8}, \frac{1}{4} \right] \cup \cdots$ and a similar form for $y$. We
+notice that the graph of this region is a sort of checkerboard of rectangles,
+and we compute the area as
+\[ \begin{aligned}
+A(S) &= \left( \frac{1}{2} + \frac{1}{8} + \cdots \right) \left( \frac{4}{5} +
+\frac{4}{125} + \cdots \right) \\
+&= \frac{1}{2} \cdot \frac{4}{5} \cdot \frac{1}{1 - \frac{1}{4}} \cdot
+\frac{1}{1 - \frac{1}{25}} \\
+&= \frac{5}{9}, \\
+\end{aligned} \]
+so the answer is $5 + 9 = \boxed{014}$.
+\end{proof}
+\fi
+
+\begin{prb}[2004 AIME I-13]
+The polynomial $P(x) = (1 + x + x^2 + \cdots + x^{17})^2 - x^{17}$ has $34$
+complex roots of the form $z_k = r_k \left( \cos (2 \pi a_k) + i \sin (2 \pi
+a_k) \right), k = 1, 2, 3, \dots, 34$ with $0 \leq a_1 \leq a_2 \leq \cdots \leq
+a_{34} < 1$ and $r_k > 0$. Given that $a_1 + a_2 + a_3 + a_4 + a_5 =
+\frac{m}{n}$ where $m$ and $n$ are relatively prime positive integers, find $m +
+n$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Rewrite
+\[ \begin{aligned}
+P(x) &= \left( \frac{x^{18} - 1}{x - 1} \right)^2 - x^{17} \\
+&= \frac{x^{36} - 2x^{18} + 1}{(x - 1)^2} - x^{17} \\
+&= \frac{x^{36} - 2x^{18} + 1 - x^{17}(x^2 - 2x + 1)}{(x - 1)^2} \\
+&= \frac{x^{36} - x^{19} - x^{17} + 1}{(x - 1)^2} \\
+&= \frac{(x^{19} - 1) (x^{17} - 1)}{(x - 1)^2} \\
+&= (1 + x + x^2 + \cdots + x^{18}) (1 + x + x^2 + \cdots + x^{16}), \\
+\end{aligned} \]
+so $a_k = \frac{1}{19}, \frac{2}{19}, \dots, \frac{18}{19}, \frac{1}{17},
+\frac{2}{17}, \dots, \frac{16}{17}$. We add up the smallest $5$ of these to get
+\[ \frac{1}{19} + \frac{1}{17} + \frac{2}{19} + \frac{2}{17} + \frac{3}{19} =
+\frac{159}{323}, \]
+so the answer is $159 + 323 = \boxed{482}$.
+\end{proof}
+\fi
+
+\begin{prb}
+Let $0 \leq \theta < \frac{\pi}{2}$ and $\sin \theta = \frac{1}{7}$. Compute the
+sum
+\[ \sum_{n = 0}^{\infty} \frac{\cos (n\theta)}{2^n}. \]
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Compute $\cos \theta = \sqrt{1 - \frac{1}{49}} = \frac{4 \sqrt{3}}{7}$. This is
+equivalent of taking the real part of
+\[ \begin{aligned}
+\sum_{n = 0}^{\infty} \frac{\cos (n\theta) + i \sin (n\theta)}{2^n} &= \sum_{n =
+0}^{\infty} \frac{(\cos \theta + i \sin \theta)^n}{2^n} \\
+&= \frac{1}{1 - \dfrac{\cos \theta + i \sin \theta}{2}} \\
+&= \frac{1}{1 - \dfrac{2 \sqrt{3}}{7} + \dfrac{i}{14}} \\
+&= \frac{1 - \dfrac{2 \sqrt{3}}{7} - \dfrac{i}{14}}{1 + \dfrac{12}{49} -
+\dfrac{4 \sqrt{3}}{7} + \dfrac{1}{196}} \\
+&= \frac{1 - \dfrac{2 \sqrt{3}}{7} - \dfrac{i}{14}}{\dfrac{35 - 16
+\sqrt{3}}{28}} \\
+&= \frac{28 - 8 \sqrt{3} - 2i}{35 - 16 \sqrt{3}}, \\
+\end{aligned} \]
+which is $\frac{(28 - 8 \sqrt{3})(35 + 16 \sqrt{3})}{35^2 - 3 \cdot 16^2} =
+\frac{980 - 384 + 168 \sqrt{3}}{457} = \boxed{\frac{576 + 168 \sqrt{3}}{457}}$.
+\end{proof}
+\fi
+
+\begin{prb}[2003 AIME I-8]
+In an increasing sequence of four positive integers, the first three terms form
+an arithmetic progression while the last three terms form a geometric
+progression. The first and last terms differ by $30$. Compute the sum of the
+four terms.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Write the numbers as $a - d, a, a + d, \frac{(a + d)^2}{a}$. Consider $\frac{a +
+d}{a} = \frac{m}{n}$, where $m, n$ are relatively prime. For every prime $p \mid
+n$, we have $\frac{(a + d)^2}{a} = a \cdot \frac{m^2}{n^2}$ is an integer, so
+$p^2 \mid a$. Thus $a$ is a multiple of a perfect square. Also notice that if $p
+\mid a$, then $p \mid a + d$ must be true if $\frac{(a + d)^2}{a}$ is an
+integer, so we also have $p \mid d$. Also notice that if $a_1, a_2, a_3, a_4$
+satisfies $a_1, a_2, a_3$ are in arithmetic progression and $a_2, a_3, a_4$ are
+in geometric progression, scaling the series by an integer $k$ does not change
+this fact. We can now start building series around small perfect squares until
+we find a difference that divides $30$. In particular, for $a = 4$, we only have
+$2, 4, 6, 9$ with a difference of $7$. For $a = 9$, we can have $d = 3$ or $d =
+6$, giving series $6, 9, 12, 16$ and $3, 9, 15, 25$ with differences $10$ and
+$22$. $10 \mid 30$ so we scale the first series by $3$ to get $18, 27, 36, 48$,
+which clearly satisfies the given conditions. Compute the answer as $18 + 27 +
+36 + 48 = 3 \cdot 27 + 48 = \boxed{129}$.
+\end{proof}
+\fi
+
+\begin{prb}[2004 AIME II-9]
+A let $a_i$ be a sequence of positive integers with $a_1 = 1, a_9 + a_{10} =
+646$ such that $a_{2n - 1}, a_{2n}, a_{2n + 1}$ are in geometric progression and
+$a_{2n}, a_{2n + 1}, a_{2n + 2}$ are in arithmetic progression. Let $a_n$ be the
+greatest term in this sequence less than $1000$. Compute $n + a_n$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+We write out a few test series to figure out what the second term should be.
+These are
+\[ \begin{aligned}
+1, 2, 4, 6, 9, 12, 16, 20, 25, \dots \\
+1, 3, 9, 15, 25, 35, 49, 63, 81, \dots \\
+1, 4, 16, 28, 49, 70, 100, 130, 169, \dots \\
+\end{aligned} \]
+In particular, we notice that $a_{2k + 1} = (1 + k(x - 1))^2$ where $a_2 = x$.
+If we set $x = 6$, we get $a_9 = 441$, and $a_9 + a_{10} > 2 a_9$, so $x = 6$ is
+too big. If we set $x = 4$, then $a_9 + a_{10} < 2 a_{11} = 2 \cdot 16^2 = 512$,
+so $x = 4$ is too small. Because the conditions of the problem are supposed to
+be correct, we deduce that $x = 5, a_{15} = 29^2 = 841, a_{17} = 33^2 = 1089$,
+so we are in fact looking for $a_{16} = \sqrt{29^2 \cdot 33^2} = 957$. Compute the
+answer as $16 + 957 = \boxed{973}$.
+\end{proof}
+\fi
+
+\begin{prb}[2008 ARML T-10]
+The positive integers $a_1, a_2, \dots, a_{72}$ form an increasing arithmetic
+sequence with $a_5 = 300$. If we remove $67$ of these numbers, including $a_3$
+through $a_7$, the resulting five integers form a geometric sequence. Compute
+the value of the largest of those five integers.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let the common difference be $d$. Let $a_n$ be the first term in the geometric
+sequence. If $a_n$ and $a_{n + k}$ are terms in the geometric sequence with
+ratio $r$, then the next term is $ra_{n + k} = r (a_n + kd) = a_{n + k} + rkd =
+a_{n + k + rk}$. Similarly, the next term would be $a_{n + k + rk + r^2 k}$.
+
+Notice that $r = 1$ is impossible for obvious reasons.
+
+If $r = 2$, we have subscripts $n, n + k, n + 3k, n + 7k, n + 15k$, or $15k < 71
+\implies k < 5$. Suppose $n = 1$.  Then $n + 3k$ would fall into $3, 4, 5, 6,
+7$, which are part of the removed indices. for $k = 1, 2$. The same goes for $n
++ k$ for $k = 3, 4$. Similar logic applies to $n = 2$. Thus $n \geq 8$. Then we
+compute $a_{n + k} = 2a_n$, implying $a_{n - k} = 0$.
+
+If $r = 3$, then we have subscripts $n, n + k, n + 4k, n + 13k, n + 40k$, so
+$40k < 71 \implies k = 1$. Notice that $n = 1$ is impossible because $n + 4 =
+5$. If $n > 1$, then because $r = 3$, we have $a_{n + 1} = 3 a_n$, so $a_{n - 1}
+= -a_n$.
+
+If $r \geq 4$, then $n + k + rk + r^2 k + r^3 k \geq 1 + 85k$, which admits no
+integer $k$.
+
+So let $r = \frac{p}{q}$, where $p$ and $q$ are relatively prime. We require
+$r^3 k$ to be an integer, so $q^3 \mid k$, or $k \geq q^3$. Additionally, we can
+compute $r^3 k = j p^3$, so we can require $p^3 + q^3 \leq 71$. The only such
+$p, q$ are $2$ and $3$.
+
+$r > 1$ implies $r = \frac{3}{2}$. Then the smallest $k$ is $k = 8$. Any larger
+$k$ clearly won't work. The last term has index $n + 65 \leq 72$, or $n \leq 7$,
+implying $n = 1, 2$. We also have $a_n + 8d = a_{n + 8} = \frac{3}{2} a_n
+\implies a_n = 16d$. If $n = 1$, then $a_5$ = $16d + 4d = 300 \implies d = 15$.
+If $n = 2$, then $a_5 = 16d + 3d = 300 \implies d = \frac{300}{19}$, which is
+not integral, so $n$ must be $1$. Thus compute $a_{66} = 16 \cdot 15 \cdot
+\left( \frac{3}{2} \right)^4 = \boxed{1215}$.
+\end{proof}
+\fi
+
+\begin{prb}[JBMO 1999-1]
+Let $a, b, c, x, y$ be five real numbers such that $a, b, c$ are pairwise
+distinct and satisfy
+\[ \begin{aligned}
+a^3 + ax + y &= 0 \\
+b^3 + bx + y &= 0 \\
+c^3 + cx + y &= 0 \\
+\end{aligned} \]
+Prove that $a + b + c = 0$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+$a, b, c$ are the roots of $P(t) = t^3 + xt + y$.
+\end{proof}
+\fi
+
+\begin{prb}[2008 AIME II-7]
+Let $r, s, t$ be the roots of the equation
+\[ 8x^3 + 1001x + 2008 = 0. \]
+Find $(r + s)^3 + (s + t)^3 + (t + r)^3$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Notice $r + s + t = 0$, so this is equivalent to finding $-(r^3 + s^3 + t^3)$.
+Recall that we can factor
+\[ x^3 + y^3 + z^3 - 3xyz = (x + y + z)(x^2 + y^2 + z^2 - xy - yz - zx). \]
+This means $r^3 + s^3 + t^3 = 3xyz = -3 \cdot \frac{2008}{8} = -753$. Taking the
+opposite of that yields an answer of $\boxed{753}$.
+\end{proof}
+\fi
+
+\begin{prb}
+Consider all lines that meet $y = 2x^4 + 7x^3 + 3x - 5$ at four distinct points
+$(x_1, y_1), \dots, (x_4, y_4)$. Show that
+\[ \frac{x_1 + x_2 + x_3 + x_4}{4} \]
+is independent of line and find its value.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Take any line $y = ax + b$ and consider the roots of $2x^4 + 7x^3 + (3 - a)x -
+(5 + b) = 0$. The sum of the roots is $-\frac{7}{2}$, which is constant, so the
+value is indeed independent of line and has value $\boxed{-\frac{7}{8}}$.
+\end{proof}
+\fi
+
+\begin{prb}
+Let $a < b < c$ be positive real numbers such that $a + b + c = 12$, $a^2 + b^2
++ c^2 = 50$, and $a^3 + b^3 + c^3 = 216$. Compute the value of $a + 2b + 3c$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Compute $2(ab + bc + ca) = (a + b + c)^2 - a^2 - b^2 - c^2$, so $ab + bc + ca =
+\frac{144 - 50}{2} = 47$. Next, compute
+\[ 3(a^2 b + a b^2 + a^2 c + a c^2 + b^2 c + b c^2) = (a + b + c)^3 - a^3 - b^3
+- c^3 = 12^3 - 216. \]
+Factor the LHS as
+\[ 12^3 - 216 = 3(a + b)(b + c)(c + a) = 3(12 - a)(12 - b)(12 - c) = 3(12^3 -
+144(a + b + c) + 12(ab + bc + ca) - abc), \]
+where the RHS can be rewritten as
+\[ 12^3 - 216 = 3 \cdot 12 \cdot 47 - 3abc, \]
+which rearranges to
+\[ -abc = \frac{1728 - 216 - 1692}{3} = -60. \]
+So $a, b, c$ are the roots of the polynomial $x^3 - 12x^2 + 47x - 60 = 0$.
+Coincidentally, this factors as $(x - 3)(x - 4)(x - 5) = 0$ so $3 + 2 \cdot 4 +
+3 \cdot 5 = \boxed{26}$.
+\end{proof}
+\fi
+
+\begin{prb}[Purple Comet 2010 HS-25]
+Let $x_1, x_2, x_3$ be the roots of $x^3 + 3x + 1$. There are relatively prime
+integers $m, n$ such that
+\[ \frac{m}{n} = \frac{x_1^2}{(5x_2 + 1)(5x_3 + 1)} + \frac{x_2^2}{(5x_3 +
+1)(5x_1 + 1)} + \frac{x_3^2}{(5x_1 + 1)(5x_2 + 1)}. \]
+Find $m + n$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+We bash and compute the sum as
+\[ \frac{5 (x_1^3 + x_2^3 + x_3^3) + x_1^2 + x_2^2 + x_3^2}{(5x_1 + 1) (5x_2 +
+1) (5x_3 + 1)}. \]
+The numerator is 
+\[ 5 ((x_1 + x_2 + x_3)(...) + 3 x_1 x_2 x_3) + (x_1 + x_2 + x_3)^2 - 2 (x_1 x_2
++ x_2 x_3 + x_3 x_1) = -15 - 6 = -21. \]
+The denominator is
+\[ 1 + 5 (x_1 + x_2 + x_3) + 25 (x_1 x_2 + x_2 x_3 + x_3 x_1) + 125 x_1 x_2 x_3
+= 1 + 75 - 125 = -49. \]
+Thus $\frac{m}{n} = \frac{21}{49} = \frac{3}{7}$, so $m + n = \boxed{10}$.
+\end{proof}
+\fi
+
+\begin{prb}[Brilliant.org]
+The quartic equation $x^4 + 3x^3 + 11x^2 + 9x + A$ has roots $a, b, c, d$ such
+that $ab = cd$. Compute $A$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let $ab = cd = k$. By Vieta, we have
+\[ \begin{aligned}
+a + b + c + d &= -3 \\
+ab + ac + ad + bc + bd + cd &= 11 \\
+abc + abd + acd + bcd &= -9 \\
+abcd &= A. \\
+\end{aligned} \]
+Let $p = a + b$ and $q = c + d$. We can write
+\[ \begin{aligned}
+p + q &= -3 \\
+kp + kq &= -9, \\
+\end{aligned} \]
+so $k = 3$ and $A = k^2 = \boxed{9}$.
+\end{proof}
+\fi
+
+\begin{prb}[USAMO 1984-1]
+The product of two of the roots of the polynomial equation $x^4 - 18x^3 + kx^2 +
+200x - 1984 = 0$ is $-32$. Find $k$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let $a, b, c, d$ be the roots and let $ab = -32$. Note that by Vieta, we have
+\[ \begin{aligned}
+a + b + c + d &= 18 \\
+ab + ac + ad + bc + bd + cd &= k \\
+abc + abd + acd + bcd &= -200 \\
+abcd &= -1984. \\
+\end{aligned} \]
+Compute $cd = \frac{abcd}{ab} = \frac{-1984}{-32} = 62$. Also note that our
+equation for $k$ becomes
+\[ k = ac + ad + bc + bd + 30 = (a + b)(c + d) + 30. \]
+Let $p = a + b$ and $q = c + d$. We rewrite two of the equations as
+\[ \begin{aligned}
+p + q &= 18 \\
+-32q + 62p &= -200. \\
+\end{aligned} \]
+Solve for $p$ and $q$ to get $p = 4$ and $q = 14$. Then $k = 4 \cdot 14 + 30 =
+\boxed{86}$.
+\end{proof}
+\fi
+
+\begin{prb}[HMMT 2007 A-9]
+The complex numbers $\alpha_1, \alpha_2, \alpha_3, \alpha_4$ are the four
+distinct roots of the equation $x^4 + 2x^3 + 2 = 0$. Compute the unordered set
+\[ \set{\alpha_1 \alpha_2 + \alpha_3 \alpha_4, \alpha_1 \alpha_3 + \alpha_2
+\alpha_4, \alpha_1 \alpha_4 + \alpha_2 \alpha_3}. \]
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let the set be $\set{x, y, z}$. Now we compute
+\[ \begin{aligned}
+x + y + z &= 0, \\
+xy + yz + zx &= \sum_{cyc} \alpha_1^2 (\alpha_2 \alpha_3 + \alpha_3 \alpha_4 +
+\alpha_4 \alpha_2) \\
+&= \sum_{cyc} \alpha_1^2 (-\alpha_1 (\alpha_2 + \alpha_3 + \alpha_4)) \\
+&= \sum_{cyc} -\alpha_1^3 (-2 - \alpha_1) \\
+&= \sum_{cyc} (\alpha_1^4 + 2 \alpha_1^3) \\
+&= \sum_{cyc} (P(\alpha_1) - 2) = -8, \\
+xyz &= \sum_{cyc} (\alpha_1^2 (\alpha_1 \alpha_2 \alpha_3 \alpha_4) + \alpha_2^2
+\alpha_3^2 \alpha_4^2) \\
+&= \sum_{cyc} 2\alpha_1^2 + \left(\sum_{cyc} \alpha_1 \alpha_2 \alpha_3
+\right)^2 \\
+&= 2 \left( \sum_{cyc} \alpha_1 \right)^2 \\
+&= 2 \cdot (-2)^2 = 8, \\
+\end{aligned} \]
+so $x, y, z$ are the roots of the polynomial $t^3 - 8t - 8 = 0$, which factors
+as $(t + 2)(t^2 - 2t - 4) = 0$, so
+\[ \boxed{\set{x, y, z} = \set{-2, 1 - \sqrt{5}, 1 - \sqrt{5}}}. \]
+\end{proof}
+\fi
