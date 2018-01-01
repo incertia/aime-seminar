@@ -1,0 +1,1112 @@
+\begin{prb}
+Triangle $ABC$ has $AC = 450$ and $BC = 300$. Points $K$ and $L$ are located on
+$\overline{AC}$ and $\overline{AB}$ respectively so that $AK = CK$, and
+$\overline{CL}$ is the angle bisector of angle $C$. Let $P$ be the point of
+intersection of $\overline{BK}$ and $\overline{CL}$, and let $M$ be the point on
+line $BK$ for which $K$ is the midpoint of $\overline{PM}$. If $AM = 180$, find
+$LP$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let's draw a diagram.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+pen f = fontsize(7pt);
+
+pair A = (0, 0);
+pair B = (30 * sqrt(331), 0);
+pair LL = (18 * sqrt(331), 0);
+
+path C1 = Circle(A, 450);
+path C2 = Circle(B, 300);
+
+pair C = intersectionpoints(C1, C2)[0];
+pair K = (A + C) / 2;
+pair P = intersectionpoints(C -- LL, B -- K)[0];
+pair M = K + (K - P);
+
+draw(A -- B -- C -- cycle);
+draw(B -- M -- A);
+draw(C -- LL);
+draw(M -- C, Dotted);
+draw(A -- P, Dotted);
+
+markangle(radius=10, A, C, LL, angleticker(1, 1.4mm));
+markangle(radius=10, LL, C, B, angleticker(1, 1.4mm));
+
+real MAB = degrees(M - A) - degrees(B - A);
+real CAB = degrees(C - A) - degrees(B - A);
+real CBA = degrees(A - B) - degrees(C - B);
+
+label("$A$", A, SW);
+label("$B$", B, SE);
+label("$C$", C, N);
+label("$K$", K, N);
+label("$L$", LL, S);
+label("$M$", M, N);
+label("$P$", P, NE);
+label(rotate(MAB) * "$180$", A -- M, W, f);
+label(rotate(-CBA) * "$300$", B -- C, NE, f);
+label(rotate(CAB) * "$225$", A -- K, NW, f);
+label(rotate(CAB) * "$225$", C -- K, NW, f);
+\end{asy}
+\end{center}
+
+Notice that $AMCP$ is a parallelogram. This gives us $CP = 180$. Via similar
+triangles and angle bisector theorem, $\frac{180}{LP} = \frac{AL + LB}{LB} =
+\frac{AL}{LB} + 1 = \frac{450}{300} + 1 = \frac{5}{2}$, immediately giving us
+$LP = \boxed{072}$.
+\end{proof}
+\fi
+
+\begin{prb}[2011 AIME I-4]
+In triangle $ABC$, $AB = 125$, $AC = 117$, and $BC = 120$. The angle bisector of
+angle $A$ intersects $\overline{BC}$ at point $L$, and the angle bisector of
+angle $B$ intersects $\overline{AC}$ at point $K$. Let $M$ and $N$ be the feet
+of the perpendiculars from $C$ to $\overline{BK}$ and $\overline{AL}$,
+respectively. Find $MN$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+The diagram looks something like this.
+
+\begin{center}
+\begin{asy}
+pair A = (0, 0);
+pair B = (125, 0);
+
+path C1 = Circle(A, 117);
+path C2 = Circle(B, 120);
+pair C = intersectionpoints(C1, C2)[0];
+pair I = incenter(A, B, C);
+pair L = extension(A, I, B, C);
+pair K = extension(B, I, A, C);
+pair M = foot(C, B, K);
+pair N = foot(C, A, L);
+pair P = extension(C, M, A, B);
+pair Q = extension(C, N, A, B);
+
+draw(A -- B -- C -- cycle);
+draw(A -- L);
+draw(B -- K);
+draw(C -- P);
+draw(C -- Q);
+draw(M -- N);
+// draw(circumcircle(C, M, N));
+
+label("$A$", A, SW);
+label("$B$", B, SE);
+label("$C$", C, (0, 1));
+label("$L$", L, NE);
+label("$K$", K, NW);
+label("$M$", M, S);
+label("$N$", N, S);
+label("$P$", P, SE);
+label("$Q$", Q, SW);
+\end{asy}
+\end{center}
+
+Extend $CM$ to $P$ and $CN$ to $Q$ on $AB$. $M$ is the foot of the perpendicular
+from $B$ to $CP$, as well as an angle bisector, so $M$ is a midpoint and $BP =
+BC = 120$. Similarly, $N$ is also a midpoint and $AQ = AC = 117$. Thus $MN =
+\frac{1}{2} PQ$, but $PQ = AQ + PB - AB = 120 + 117 - 125 = 112$, so $MN =
+\boxed{056}$.
+\end{proof}
+\fi
+
+\begin{prb}
+Circles $A$ and $B$, with radii $1$ and $2$, respectively, are externally
+tangent to each other. Let $\overline{PQ}$ be an external common tangent.
+Compute the radius of circle $C$, whose radius is less than $1$, which is
+tangent to both circles $A$ and $B$, as well as the segment $\overline{PQ}$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+This is just Descartes' Circle Theorem, but with one radius set to $+\infty$ for
+a curvature of $0$! Compute
+\[ \left( \frac{1}{1} + \frac{1}{2} + \frac{1}{r} \right)^2 = \frac{2}{1} +
+\frac{2}{4} + \frac{2}{r^2}. \]
+This is equivalent to $\frac{(3r + 2)^2}{4r^2} = \frac{5r^2 + 4}{2r^2}$, or $r^2
+- 12r + 4 = 0$, which has solutions $6 \pm 4 \sqrt{2}$. We take the smaller
+solution of $\boxed{6 - 4 \sqrt{2}}$.
+\end{proof}
+\fi
+
+\begin{prb}[2014 AIME II-8]
+Circle $C$ with radius 2 has diameter $\overline{AB}$. Circle $D$ is internally
+tangent to circle $C$ at $A$. Circle $E$ is internally tangent to circle $C$,
+externally tangent to circle $D$, and tangent to $\overline{AB}$. The radius of
+circle $D$ is three times the radius of circle $E$, and can be written in the
+form $\sqrt{m} - n$, where $m$ and $n$ are positive integers. Find $m + n$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Consider the following diagram after reflecting $E$ over $\overline{AB}$.
+
+\begin{center}
+\begin{asy}
+pair A = (-2, 0);
+pair B = (2, 0);
+path C = Circle((0, 0), 2);
+real d = sqrt(240) - 14;
+pair D = (-2 + d, 0);
+path DD = Circle(D, d);
+real e = d / 3;
+pair E = (sqrt(4 - 4 * e), e);
+path EE = Circle(E, e);
+
+draw(C);
+draw(DD);
+draw(EE);
+draw(shift(0, -2 * e) * EE);
+draw(A -- B);
+draw(D -- E);
+
+label("$A$", A, SW);
+label("$B$", B, SE);
+label("$D$", D, S);
+label("$E$", E, N);
+\end{asy}
+\end{center}
+
+This looks like a perfect opportunity to use Descartes' Circle Theorem! In
+particular, let the radius of $E$ be $r$ so we have
+\[ \left( \frac{1}{r} + \frac{1}{r} + \frac{1}{3r} - \frac{1}{2} \right)^2 =
+\frac{2}{r^2} + \frac{2}{r^2} + \frac{2}{9r^2} + \frac{2}{4}. \]
+This rearranges to $\frac{(14 - 3r)^2}{36r^2} = \frac{76 + 9r^2}{18r^2}$.
+Clearing denominators, expanding, and rearranging yields $9r^2 + 84r - 44 = 0$.
+Making the substitution $R = 3r$, this becomes $R^2 + 28R - 44 = 0$, which we
+can solve as $R = -14 \pm \frac{\sqrt{784 + 176}}{2} = -14 +
+\frac{\sqrt{960}}{2} = -14 + \sqrt{240}$. Thus the answer is $240 + 14 =
+\boxed{256}$.
+\end{proof}
+\fi
+
+\begin{prb}[2015 AMC12A-25]
+A collection of circles in the upper half-plane, all tangent to the $x$-axis, is
+constructed in layers as follows. Layer $L_0$ consists of two circles of radii
+$70^2$ and $73^2$ that are externally tangent. For $k \geq 1$, the circles in
+$\bigcup_{j = 0}^{k - 1} L_j$ are ordered according to their points of tangency
+with the $x$-axis. For every pair of consecutive circles in this order, a new
+circle is constructed externally tangent to each of the two circles in the pair.
+Layer $L_k$ consists of the $2^{k - 1}$ circles constructed in this way. Let $S
+= \bigcup_{j = 0}^6 L_j$, and for every circle $C$ denote by $r(C)$ its radius.
+What is $\sum_{C \in S} \frac{1}{\sqrt{r(C)}}$?
+
+\begin{center}
+\begin{asy}
+size(8cm);
+
+// define a bunch of arrays and starting points
+pair[] coord = new pair[65];
+int[] trav = {32, 16, 8, 4, 2, 1};
+coord[0] = (0, 73 * 73);
+coord[64] = (2 * 73 * 70, 70 * 70);
+
+// draw the big circles and the bottom line
+path arc1 = arc(coord[0], coord[0].y, 260, 360);
+path arc2 = arc(coord[64], coord[64].y, 175, 280);
+fill((coord[0].x - 910, coord[0].y) -- arc1 -- cycle, gray(0.78));
+fill((coord[64].x + 870, coord[64].y + 425) -- arc2 -- cycle, gray(0.78));
+draw(arc1^^arc2);
+draw((-930, 0) -- (70 * 70 + 73 * 73 + 850, 0));
+
+// We now apply the findCenter function 63 times to get the location of the
+// centers of all 63 constructed circles. The complicated array setup ensures
+// that all the circles will be taken in the right order
+for (int i = 0; i <= 5; i = i + 1) {
+  int skip = trav[i];
+  for (int k = skip; k <= 64 - skip; k = k + 2 * skip) {
+    pair cent1 = coord[k-skip], cent2 = coord[k+skip];
+    real r1 = cent1.y, r2 = cent2.y, rn=r1 * r2 / ((sqrt(r1)+sqrt(r2))^2);
+    real shiftx = cent1.x + sqrt(4 * r1 * rn);
+    coord[k] = (shiftx, rn);
+  }
+}
+// Draw the remaining 63 circles
+for (int i = 1; i <= 63;i = i + 1) {
+  filldraw(Circle(coord[i],coord[i].y),gray(0.78));
+}
+\end{asy}
+\end{center}
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+This also looks like a direct application of Descartes' Circle Theorem! Since
+the radii are getting smaller, we want to look for radii of the form
+\[ \frac{1}{r} = \frac{1}{r_1} + \frac{1}{r_2} + \frac{2}{\sqrt{r_1 r_2}}. \]
+However, this is just
+\[ \frac{1}{\sqrt{r}} = \frac{1}{\sqrt{r_1}} + \frac{1}{\sqrt{r_2}} \]
+in disguise! Let $\sqrt{k_1} = \frac{1}{70}, \sqrt{k_2} = \frac{1}{73}$. Layer
+$L_1$ contributes $\sqrt{k_1} + \sqrt{k_2}$ to the sum. Layer $L_2$ contributes
+$3(\sqrt{k_1} + \sqrt{k_2})$ to the sum. Some computation yields layer $L_3$
+contributes $9(\sqrt{k_1} + \sqrt{k_2})$ to the sum. In general, layer $L_n$
+contributes $3^{n - 1} (\sqrt{k_1} + \sqrt{k_2})$ to the sum. The answer is just
+\[ (1 + 1 + 3 + 9 + 27 + 81 + 243) (\sqrt{k_1} + \sqrt{k_2}) = 365 \cdot
+\frac{143}{73 \cdot 70} = 5 \cdot 73 \cdot \frac{143}{73 \cdot 70} =
+\boxed{\frac{143}{14}}. \]
+\end{proof}
+\fi
+
+\begin{prb}[2002 AIME II-14]
+The perimeter of triangle $APM$ is $152$, and angle $PAM$ is a right angle. A
+circle of radius $19$ with center $O$ on $\overline{AP}$ is drawn so that it is
+tangent to $AM$ and $PM$. Given that $OP = \frac{m}{n}$, where $m$ and $n$ are
+relatively prime positive integers, find $m + n$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let's draw a diagram.
+
+\begin{center}
+\begin{asy}
+size(5cm);
+
+pen f = fontsize(7pt);
+
+pair A = (0, 0);
+pair M = (0, 38);
+pair P = (19 + 95 / 3, 0);
+pair O = (19, 0);
+pair D = (38, 0);
+
+path C = Circle(O, 19);
+pair B = foot(O, M, P);
+
+draw(M -- A -- P -- cycle);
+draw(O -- B);
+draw(C);
+
+label("$M$", M, NW);
+label("$A$", A, SW);
+label("$P$", P, SE);
+label("$B$", B, NE);
+label("$O$", O, S);
+label("$x$", (D + P) / 2, S, f);
+label("$19$", (O + D) / 2, S, f);
+label("$19$", (O + A) / 2, S, f);
+label("$19$", (O + B) / 2, NW, f);
+label("$y$", (P + B) / 2, NE, f);
+label("$z$", (M + B) / 2, NE, f);
+label("$z$", (M + A) / 2, W, f);
+\end{asy}
+\end{center}
+
+Notice that $OBP$ and $MAP$ are similar. Thus the ratio of the permiters is the
+ratio of the sides. The perimeter of $OBP$ is $38 + x + y$, which also happens
+to equal $152 - 2z$. Solving the equality $\frac{19}{z} = \frac{152 - 2z}{152}$
+for $z$ gives $z^2 - 76z + 19 \cdot 76 = 0$, but $19 \cdot 76 = 38^2$, so this
+is just $(z - 38)^2 = 0$, or $z = 38$. We now know that $x + y = 38$, by
+subtracting $38 + 2z$ from the perimeter. Also $\frac{y}{x + 38} =
+\frac{19}{38}$, so $2y = x + 38$. Solving for $x$ yields $x = \frac{38}{3}$. $OP
+= \frac{38}{3} + 19 = \frac{95}{3}$. Thus $m + n = \boxed{098}$.
+\end{proof}
+\fi
+
+\begin{prb}[2002 AIME I-13]
+In triangle $ABC$ the medians $\overline{AD}$ and $\overline{CE}$ have lengths
+$18$ and $27$, respectively, and $AB = 24$. Extend $\overline{CE}$ to intersect
+the circumcircle of $ABC$ at $F$. The area of triangle $AFB$ is $m\sqrt{n}$,
+where $m$ and $n$ are positive integers and $n$ is not divisible by the square
+of any prime. Find $m + n$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+We draw a diagram.
+
+\begin{center}
+\begin{asy}
+size(5cm);
+
+pen f = fontsize(7pt);
+
+pair A = (0, 0);
+pair B = (24, 0);
+pair E = (12, 0);
+
+path C1 = Circle(E, 27);
+path C2 = Circle(A, sqrt(630));
+
+pair C = intersectionpoints(C1, C2)[0];
+pair D = (B + C) / 2;
+path CC = circumcircle(A, B, C);
+pair F = intersectionpoints(CC, E -- E + (E - C))[0];
+
+draw(A -- B -- C -- cycle);
+draw(A -- D);
+draw(C -- F);
+draw(A -- F -- B);
+draw(CC);
+
+label("$A$", A, SW);
+label("$B$", B, SE);
+label("$C$", C, NW);
+label("$D$", D, NE);
+label("$E$", E, SW);
+label("$F$", F, SE);
+label("$12$", (A + E) / 2, N, f);
+label("$12$", (B + E) / 2, N, f);
+label("$18$", (A + D) / 2, SE, f);
+label("$27$", (C + E) / 2, SW, f);
+\end{asy}
+\end{center}
+
+We apply Stewart's Theorem to sides $AEB$ and $BDC$. One application yields
+\[ 12 (AC)^2 + 12 (BD)^2 = 24 \cdot 27^2 + 24 \cdot 12^2, \]
+or
+\[ (AC)^2 + (BD)^2 = 2 \cdot 27^2 + 2 \cdot 12^2. \]
+The next yields
+\[ \frac{1}{2} \cdot 24^2 (BC) + \frac{1}{2} (AC)^2 (BD) = 27^2 (BC) +
+\frac{1}{4} (BC)^3, \]
+or
+\[ 2 \cdot 24^2 + 2 (AC)^2 = 4 \cdot 27^2 + (BC)^2. \]
+We solve for $(AC)^2$ and find that $(AC)^2 = 630$. Using the law of cosines, we
+compute
+\[ \cos \angle AEC = \frac{144 + 729 - 630}{2 \cdot 12 \cdot 27} = \frac{3}{8}.
+\]
+Then $\sin \angle AEC = \sin \angle AEF = \frac{\sqrt{55}}{8}$. By power of a
+point, $27 (EF) = 12^2$, so $EF = \frac{16}{3}$. Now we can compute
+\[ [AFB] = 12 \cdot \frac{16}{3} \cdot \frac{\sqrt{55}}{8} = 8 \sqrt{55}. \]
+The answer is then $8 + 55 = \boxed{063}$.
+\end{proof}
+\fi
+
+\begin{prb}[PuMAC 2016 G-A5]
+Let $D$, $E$, and $F$ respectively be the feet of the altitudes from $A$, $B$,
+and $C$ of acute triangle $\triangle ABC$ such that $AF = 28$, $FB = 35$, and
+$BD = 45$.  Let $P$ be the point on segment $BE$ such that $AP = 42$. Find the
+length of $CP$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let's draw a diagram to better understand the problem.
+
+\begin{center}
+\begin{asy}
+pen f = fontsize(7pt);
+
+pair A = (45, 18 * sqrt(6));
+pair B = (0, 0);
+pair C = (49, 0);
+pair D = foot(A, B, C);
+pair E = foot(B, C, A);
+pair F = foot(C, A, B);
+
+path AFPDC = circumcircle(A, F, C);
+path BFEC = circumcircle(B, F, C);
+path BDEA = circumcircle(B, D, A);
+pair P = intersectionpoints(AFPDC, B -- E)[0];
+path PEC = circumcircle(P, E, C);
+path PEA = circumcircle(P, E, A);
+
+draw(A -- B -- C -- cycle);
+draw(A -- D);
+draw(B -- E);
+draw(C -- F);
+draw(A -- P);
+draw(C -- P);
+draw(subpath(AFPDC, 90, 320), red + dashed);
+draw(subpath(BFEC, -10, 210), red + dashed);
+draw(subpath(BDEA, -160, 60), red + dashed);
+draw(PEC, blue + dashed);
+draw(subpath(PEA, 80, 330), blue + dashed);
+
+label("$A$", A, N);
+label("$B$", B, SW);
+label("$C$", C, SE);
+label("$D$", D, S);
+label("$E$", E, (1, 0));
+label("$F$", F, NW);
+label("$P$", P, NW);
+label(rotate(degrees(A - F)) * "$28$", A -- F, NW, f);
+label(rotate(degrees(F - B)) * "$35$", B -- F, NW, f);
+label("$45$", B -- D, S, f);
+label("$4$", D -- C, S, f);
+label("$42$", A -- P, NW, f);
+\end{asy}
+\end{center}
+
+Note that $AFDC$ is cyclic, so via power of a point we immediately get $(BF)
+(BA) = (BD) (BC) \implies BC = 49 \implies CD = 4$. Next, compute $(AE) (AC) =
+(AF) (AB) = 1764 = (AP)^2$, where the first equality comes from power of a point
+on $BFEC$. Treating $(AP)^2 = (AE) (EC)$ on the circumcircle of $PEC$ tells us
+that $AP$ is tangent to it, but $PC$ is a diameter so $\angle APC = 90 \degree$.
+Thus $CP$ is tangent to the circumcircle of $PEA$, so we can compute $(CP)^2 =
+(CE) (CA) = (CD) (CB) = 196$, where the second equality comes from power of a
+point on $BDEA$, so $CP = \boxed{14}$.
+\end{proof}
+\fi
+
+\begin{prb}[HMMT 2014 G-8]
+Let $ABC$ be a triangle with sides $AB = 6$, $BC = 10$, and $CA = 8$. Let $M$
+and $N$ be the midpoints of $BA$ and $BC$, respectively. Choose the point $Y$ on
+ray $CM$ so that the circumcenter of triangle $AMY$ is tangent to $AN$. Find the
+area of triangle $NAY$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+If you haven't already guessed, diagrams are a pretty big deal.
+
+\begin{center}
+\begin{asy}
+pair A = (0, 0);
+pair B = (6, 0);
+pair C = (0, 8);
+pair M = (A + B) / 2;
+pair N = (B + C) / 2;
+pair G = centroid(A, B, C);
+pair cm = (M - C) / length(M - C);
+pair Y = G + 100 * cm / (3 * sqrt(73));
+
+path CC = circumcenter(A, M, Y);
+
+draw(A -- B -- C -- cycle);
+draw(C -- Y);
+draw(N -- A -- Y -- cycle);
+// draw(A -- CC -- Y);
+draw(circumcircle(A, M, Y));
+
+label("$A$", A, SW - (0.6, 0));
+label("$B$", B, SE);
+label("$C$", C, NW);
+label("$G$", G, W);
+label("$M$", M, SW);
+label("$N$", N, NE);
+label("$Y$", Y, E);
+\end{asy}
+\end{center}
+
+Let $G$ be the centroid of $ABC$, or the intersection of $AN$ and $CM$. $AN = $
+and $CM = \sqrt{73}$ for obvious reasons. Recall that the centroid splits
+medians in a $2 : 1$ ratio. Thus $GM = \frac{\sqrt{73}}{3}$ and $GA =
+\frac{10}{3}$. By power of a point, $(GA)^2 = (GM)(GY)$, so $GY = \frac{100}{3
+\sqrt{73}}$. We have many triangles that share bases, so we compute $[NAY]$ in
+the following fashion.
+\[ \begin{aligned}
+[NAY] &= [GAM] \cdot \frac{[GAY]}{[GAM]} \cdot \frac{[NAY]}{[GAY]} \\
+&= [ABC] \cdot \frac{[AMC]}{[ABC]} \cdot \frac{[GAM]}{[AMC]} \cdot
+\frac{[GAY]}{[GAM]} \cdot \frac{[NAY]}{[GAY]} \\
+&= [ABC] \cdot \frac{AM}{AB} \cdot \frac{CM}{CG} \cdot \frac{GY}{GM} \cdot
+\frac{NA}{GA} \\
+&= [ABC] \cdot \frac{1}{2} \cdot \frac{1}{3} \cdot \frac{\dfrac{100}{3
+\sqrt{73}}}{\dfrac{\sqrt{73}}{3}} \cdot \frac{3}{2} \\
+&= 24 \cdot \frac{1}{4} \cdot \frac{100}{73} \\
+&= \boxed{\frac{600}{73}}.
+\end{aligned} \]
+\end{proof}
+\fi
+
+\begin{prb}[PuMAC 2016 G-A7]
+Let $ABCD$ be a cyclic quadrilateral with circumcircle $\omega$ and let $AC$ and
+$BD$ intersect at $X$. Let the line through $A$ parallel to $BD$ intersect line
+$CD$ at $E$ and $\omega$ at $Y \neq A$. If $AB = 10$, $AD = 24$, $XA = 17$, and
+$XB = 21$, then the area of $\triangle DEY$ can be written in simplest form as
+$\frac{m}{n}$. Find $m + n$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+We begin with another diagram.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+pen f = fontsize(7pt);
+
+pair A = (6, 8);
+pair B = (0, 0);
+pair D = (6 + 16 * sqrt(2), 0);
+pair T = (6, 0);
+pair X = (21, 0);
+
+path CC = circumcircle(A, B, D);
+pair C = intersectionpoints(X -- X + (X - A), CC)[0];
+pair E = extension(A, A + (D - B), C, D);
+pair Y = intersectionpoints(A -- A + (E - A), CC)[1];
+
+draw(A -- B -- C -- D -- cycle);
+draw(A -- C);
+draw(B -- D);
+draw(A -- T);
+draw(A -- Y);
+draw(D -- E -- Y -- cycle);
+draw(subpath(CC, -5, 190));
+
+real DBA = degrees(A - B);
+
+label("$A$", A, NW);
+label("$B$", B, NW);
+label("$C$", C, SE);
+label("$D$", D, NE);
+label("$E$", E, NE);
+label("$T$", T, NE);
+label("$X$", X, NE);
+label("$Y$", Y, NE);
+label(rotate(DBA) * "$10$", A -- B, SE, f);
+label("$6$", B -- T, N, f);
+label("$8$", A -- T, (1, 0), f);
+label("$15$", X -- T, N, f);
+label(rotate(degrees(X - A)) * "$17$", A -- X, SW, f);
+label(rotate(degrees(D - A)) * "$24$", A -- D, NE, f);
+\end{asy}
+\end{center}
+
+If we drop a perpendicular from $A$ to $BX$ at $T$, we get two right triangles,
+and we can solve for their legs and height, which give us $BT$, $TX$, and $AT$.
+Notice $AT$ is also the height of $\triangle DEY$. Thus $[DEY] = \frac{1}{2}
+(AT) (EY)$, where $EY = AE - AY$. Notice that $XDC$ and $AEC$ are similar. Thus
+$AE = XD \cdot \frac{AC}{XC} = \frac{XD}{XC} \cdot AC = \frac{17}{21} AC$. Also
+$AY = BD - 2BT = 21 + XD - 12 = 9 + XD$. Rewrite $AC = 17 + XC$, so
+$\frac{17}{21} AC = \frac{289}{21} + \frac{17}{21} XC$, but $\frac{289}{21} XC =
+XD$, because $XDC \sim XAB$, so $EY = \frac{289}{21} + XD - 9 - XD =
+\frac{100}{21}$. Now we can compute $[DEY] = \frac{1}{2} \cdot 8 \cdot
+\frac{100}{21} = \frac{400}{21}$, so $m + n = \boxed{421}$.
+\end{proof}
+\fi
+
+\begin{prb}[2003 AIME I-10]
+Triangle $ABC$ is isosceles with $AC = BC$ and $\angle ACB = 106 \degree$. Point
+$M$ is in the interior of the triangle so that $\angle MAC = 7 \degree$ and
+$\angle MCA = 23 \degree$. Find the number of degrees in $\angle CMB$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+We pick the $N$ inside $ABC$ such that $\angle CBN = 7 \degree$ and $\angle BCN
+= 23 \degree$, creating the mirror image of $M$ (motivated by noticing that $CM$
+is offset $60 \degree$ from $AB$). This look something like this.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+pair A = (0, 0);
+pair B = (50, 0);
+pair D = (25, 0);
+pair E = (25, 1);
+pair C = extension(A, rotate(37) * (1, 0), D, E);
+pair M = extension(A, rotate(30) * (1, 0), C, C + rotate(-120) * (1, 0));
+pair N = (50 - M.x, M.y);
+
+draw(A -- B -- C -- cycle);
+draw(A -- M);
+draw(B -- M);
+draw(C -- M);
+draw(C -- N, Dotted);
+draw(B -- N, Dotted);
+draw(M -- N, Dotted);
+
+label("$A$", A, SW);
+label("$B$", B, SE);
+label("$C$", C, (0, 1));
+label("$M$", M, S);
+label("$N$", N, S);
+\end{asy}
+\end{center}
+
+Notice that $\angle MCN = 180 \degree - 2(37 \degree + 23 \degree) = 60
+\degree$. Obviously $CM = CN$ by construction, so $\angle CMN = \angle CNM = 60
+\degree$ as well. $\angle CMA = 150 \degree$, so $\angle CNB = 150 \degree$,
+meaning $\angle MNB = 150 \degree$, so $CNB$ and $MNB$ are congruent by SAS, so
+$\angle BCN = \angle BMN = 23 \degree$, so $\angle CMB = 60 \degree + 23 \degree
+= 83 \degree$. The answer is then $\boxed{083}$.
+\end{proof}
+\fi
+
+\begin{prb}[IMO 1985]
+A circle with center $O$ passes through vertices $A$ and $C$ of triangle $ABC$
+and intersects segments $AB$ and $BC$ again at distinct points $K$ and $N$,
+respectively. The circumcircles of triangles $ABC$ and $KBN$ intersect at
+exactly two distinct points $B$ and $M$. Show that $\angle OMB = 90 \degree$.
+
+\begin{center}
+\begin{asy}
+size(3.1cm);
+
+pair A = (0, 0);
+pair C = (48, 0);
+pair B = (16, 100);
+pair O = (24, 7);
+path C1 = Circle(O, 25);
+pair K = intersectionpoints(C1, A -- B)[0];
+pair N = intersectionpoints(C1, C -- B)[0];
+path C2 = circumcircle(B, K, N);
+path C3 = circumcircle(A, B, C);
+pair M = intersectionpoints(C2, C3)[1];
+
+draw(A -- B -- C -- cycle);
+draw(B -- M -- O);
+draw(C1);
+draw(C2);
+draw(C3);
+
+dot(O);
+
+label("$A$", A, SW);
+label("$C$", C, SE);
+label("$B$", B, (0, 1));
+label("$K$", K, W);
+label("$N$", N, E);
+label("$M$", M, NW);
+\end{asy}
+\end{center}
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Extend $KN$ and $AC$ to $D$. We draw in the circumcircles of $DAK$ and $DCN$.
+
+\begin{center}
+\begin{asy}
+size(8cm);
+
+pair A = (0, 0);
+pair C = (48, 0);
+pair B = (16, 100);
+pair O = (24, 7);
+path C1 = Circle(O, 25);
+pair K = intersectionpoints(C1, A -- B)[0];
+pair N = intersectionpoints(C1, C -- B)[0];
+path C2 = circumcircle(B, K, N);
+path C3 = circumcircle(A, B, C);
+pair M = intersectionpoints(C2, C3)[1];
+pair D = extension(K, N, A, C);
+path C4 = circumcircle(A, K, D);
+path C5 = circumcircle(C, N, D);
+
+draw(A -- B -- C -- cycle);
+draw(B -- M -- O);
+draw(N -- D -- A);
+draw(C1);
+draw(C2);
+draw(C3);
+draw(subpath(C4, -30, 230), dashed + blue);
+draw(subpath(C5, 0, 200), dashed + blue);
+
+dot(O);
+
+label("$A$", A, SW);
+label("$C$", C, SE);
+label("$B$", B, (0, 1));
+label("$D$", D, SW);
+label("$K$", K, W);
+label("$N$", N, E);
+label("$O$", O, (0, 1));
+label("$M$", M, NW);
+\end{asy}
+\end{center}
+
+$M$ is called the \textbf{Miquel point} of the cyclic quadrilateral $ACNK$. We
+claim this point always exists and is unique. The proof of this statement
+follows from the fact that given a triangle $ABC$ and distinct points $X$, $Y$,
+and $Z$ on $BC$, $CA$, and $AB$, the following circumcircles always concur at a
+single point.
+
+\begin{center}
+\begin{asy}
+size(3.6cm);
+
+pair A = (0, 0);
+pair B = (20, 0);
+pair C = (8, 18);
+pair X = B + 0.4 * (C - B);
+pair Y = C + 0.6 * (A - C);
+pair Z = A + 0.5 * (B - A);
+
+draw(A -- B -- C -- cycle);
+draw(circumcircle(A, Y, Z));
+draw(circumcircle(B, Z, X));
+draw(circumcircle(C, X, Y));
+\end{asy}
+\end{center}
+
+In particular, when looking at triangle $BCD$ with points $A, M, N$, we have
+that the circumcircles of $BMN, CNA, DAM$ all concur at the point $K$. Letting
+$M'$ be the intersection of circumcircles $DCN$ and $DAK$, we have that the
+circumcircles of $BM'N, CNA, DAM'$ all concur at $K$. $K$ being on both $DAM'$
+and $DAM$ implies that $M, M'$ are on the same circle ($DAK$). Similarly, $M,
+M'$ are both on $BKN$. Since two circles can only intersect in two places,
+either $M = K$ or $M = M'$. By construction, $M$ is not $K$, so $M = M'$.
+
+In general, this also works for any four points where the lines are not
+parallel. We can prove this by using the Simson line. If we let $P$ be the
+intersection of two circles, we can consider the feet of the perpendiculars to
+any two triangles. They must share 2 segments, so their Simson lines are the
+same. There are only $4$ lines, so the $4$ feets of the perpendiculars being
+collinear gets us that since any $3$ points are collinear and their respective
+perpendiculars intersect at $P$, then $P$ lies on the circumcircles.
+
+We now call upon another useful result. Let $A, B, C, D$ be four distinct points
+in the plane such that $AC$ is not parallel to $BC$. Let $AC$ intersect $BD$ at
+$X$. Let the circumcircles of $ABX$ and $CDX$ meet again at $O$. Then $O$ is the
+center of the spiral similarity that sends $AB$ to $CD$.
+
+\begin{center}
+\begin{asy}
+pair A = (0, 0);
+pair B = (2, 5);
+pair C = (8, 6.5);
+pair D = (11, 1);
+pair X = extension(A, C, B, D);
+
+path C1 = circumcircle(A, B, X);
+path C2 = circumcircle(C, D, X);
+
+draw(A -- C -- D -- B -- cycle);
+draw(C1);
+draw(C2);
+
+label("$A$", A, SW);
+label("$B$", B, N);
+label("$C$", C, N);
+label("$D$", D, SE);
+label("$X$", X, 2 * N);
+label("$O$", intersectionpoints(C1, C2)[1], 2 * S);
+\end{asy}
+\end{center}
+
+We want triangle $OAB$ to be similar to triangle $OCD$. We can just angle chase
+$\angle ABO = \angle AXO = 180 \degree - \angle OXC = \angle CDO$ and $\angle
+BAO = 180 \degree - \angle OXB = \angle OXD = \angle DCO$. A similar proof
+exists for the other configuration. Thus $M$ is the center of the spiral
+similarity that sends $NC$ to to $KA$, because $NK$ intersects $CA$ at $D$ and
+the circumcircles intersect at $M$.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+pair A = (0, 0);
+pair C = (48, 0);
+pair B = (16, 100);
+pair O = (24, 7);
+path C1 = Circle(O, 25);
+pair K = intersectionpoints(C1, A -- B)[0];
+pair N = intersectionpoints(C1, C -- B)[0];
+path C2 = circumcircle(B, K, N);
+path C3 = circumcircle(A, B, C);
+pair M = intersectionpoints(C2, C3)[1];
+pair M1 = (A + K) / 2;
+pair M2 = (C + N) / 2;
+
+draw(A -- B -- C -- cycle);
+draw(B -- M -- O);
+draw(M1 -- O -- M2);
+draw(C1);
+draw(C2);
+draw(C3);
+
+dot(O);
+
+label("$A$", A, SW);
+label("$C$", C, SE);
+label("$B$", B, (0, 1));
+label("$K$", K, W);
+label("$N$", N, E);
+label("$O$", O, (0, 1));
+label("$M$", M, NW);
+label("$M_1$", M1, W);
+label("$M_2$", M2, E);
+\end{asy}
+\end{center}
+
+Consider the midpoints $M_1, M_2$ of $KA$ and $NC$. This spiral similarity
+centered at $M$ must also send $NM_2$ to $KM_1$. This implies $M$ is the Miquel
+point of $M_1 M_2 N K$, so there is another spiral similarity at $M$ that sends
+$KN$ to $M_1 M_2$.  Thus $M$ lies on the circumcircle of $BM_1M_2$, which
+includes point $O$. Notice that $BO$ is a diameter because $OM_1 \perp AK$, so
+$\angle OMB = 90 \degree$, as desired.
+\end{proof}
+\fi
+
+\begin{prb}[Russia 1995, Romania TST 1996, Iran 1997]
+Consider a circle with diameter $AB$, center $O$, and two points on the circle
+$C$ and $D$. The line $CD$ meets $AB$ at $M$ satisfying $MB < MA$ and $MD < MC$.
+Let $K$ be the intersection of the circumcircles of triangles $AOC$ and $DOB$.
+Show that $\angle MKO = 90 \degree$.
+
+\begin{center}
+\begin{asy}
+size(10cm);
+
+pair A = (0, 0);
+pair B = (40, 0);
+pair C = (72 / 5, 96 / 5);
+pair M = (70, 0);
+pair O = (A + B) / 2;
+
+path OO = circumcircle(A, B, C);
+pair D = intersectionpoints(C -- M, OO)[1];
+path C1 = circumcircle(A, O, C);
+path C2 = circumcircle(D, O, B);
+pair K = intersectionpoints(C1, C2)[0];
+
+draw(A -- M -- C);
+draw(M -- K -- O);
+draw(OO);
+draw(C1);
+draw(C2);
+
+label("$A$", A, SW);
+label("$B$", B, SE);
+label("$C$", C, N);
+label("$D$", D, NE);
+label("$M$", M, SE);
+label("$K$", K, W);
+label("$O$", O, S);
+\end{asy}
+\end{center}
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Extend $AC$ and $BD$ to meet at a point $X$. Then $XCKD$ is cyclic. Recall that
+from the previous problem, we have $OR
+\perp XM$.
+
+\begin{center}
+\begin{asy}
+size(8cm);
+
+pair A = (0, 0);
+pair B = (40, 0);
+pair C = (72 / 5, 96 / 5);
+pair M = (70, 0);
+pair O = (A + B) / 2;
+
+path OO = circumcircle(A, B, C);
+pair D = intersectionpoints(C -- M, OO)[1];
+path C1 = circumcircle(A, O, C);
+path C2 = circumcircle(D, O, B);
+pair K = intersectionpoints(C1, C2)[0];
+pair X = extension(A, C, B, D);
+pair L = extension(A, D, B, C);
+path C3 = circumcircle(X, C, D);
+path C4 = circumcircle(B, A, X);
+path C5 = circumcircle(M, A, C);
+path C6 = circumcircle(M, D, B);
+pair R = extension(X, M, O, L);
+
+draw(A -- M -- C);
+draw(M -- K -- O);
+draw(A -- X -- B);
+draw(O -- R, blue);
+draw(X -- M, blue);
+draw(subpath(OO, -10, 210));
+draw(C1);
+draw(C2);
+draw(C3, red + dashed);
+draw(C4, red + dashed);
+// draw(C5, red);
+draw(C6, blue + dashed);
+draw(A -- D);
+draw(B -- C);
+
+label("$A$", A, SW);
+label("$B$", B, SE);
+label("$C$", C, N);
+label("$D$", D, NE);
+label("$X$", X, N);
+label("$M$", M, SE);
+label("$K$", K, W);
+label("$O$", O, S);
+label("$R$", R, N);
+\end{asy}
+\end{center}
+
+By power of a point on $RMBD$ (which we know contains $D$ because $ABC$ and
+$XCD$ contain $D$), we obtain $XR \cdot XM = XD \cdot XB$. $X, K, O$ are
+collinlear because $X$ is the radical center of the circumcircles of $ABCD$,
+$AOKC$, and $BOKD$. Thus we can also compute $XR \cdot XM = XD \cdot XB = XK
+\cdot XO$, so $OKRM$ is cyclic. $\angle ORM = 90 \degree$, so $\angle OKM = 90
+\degree$ as well.
+\end{proof}
+\fi
+
+\begin{prb}[USA TST 2007-5]
+Triangle $ABC$ is inscribed in circle $\omega$. The tangent lines to $\omega$ at
+$B$ and $C$ meet at $T$. Point $S$ lies on ray $BC$ such that $AS \perp AT$.
+Points $B_1$ and $C_1$ lie on ray $ST$ (with $C_1$ in between $B_1$ and $S$)
+such that $B_1 T = BT = C_1 T$. Prove that triangles $ABC$ and $A B_1 C_1$ are
+similar to each other.
+
+\begin{center}
+\begin{asy}
+size(6cm);
+
+pair A = (24, 12);
+pair B = (0, 0);
+pair C = (20, 0);
+pair O = circumcenter(A, B, C);
+pair T = extension(B, B + rotate(-90) * (O - B), C, C + rotate(90) * (O - C));
+pair S = extension(B, C, A, A + rotate(90) * (T - A));
+
+path C2 = circumcircle(B, C, T + (T - C));
+pair C1 = intersectionpoints(C2, S -- T)[0];
+pair B1 = intersectionpoints(C2, T -- T + (T - S))[0];
+
+draw(A -- B -- C -- cycle);
+draw(B -- T -- C);
+draw(C -- S);
+draw(T -- A -- S -- B1);
+draw(B1 -- A -- C1, dashed);
+draw(circumcircle(A, B, C));
+
+label("$A$", A, NE);
+label("$B$", B, SW);
+label("$C$", C, SE);
+label("$T$", T, (0, -1));
+label("$S$", S, SE);
+label("$B_1$", B1, SW);
+label("$C_1$", C1, SE);
+\end{asy}
+\end{center}
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let $X$ be the point of intersection of $BB_1$ and $CC_1$.
+
+\begin{center}
+\begin{asy}
+size(10cm);
+
+pair A = (24, 12);
+pair B = (0, 0);
+pair C = (20, 0);
+pair O = circumcenter(A, B, C);
+pair T = extension(B, B + rotate(-90) * (O - B), C, C + rotate(90) * (O - C));
+pair S = extension(B, C, A, A + rotate(90) * (T - A));
+
+path C2 = circumcircle(B, C, T + (T - C));
+pair C1 = intersectionpoints(C2, S -- T)[0];
+pair B1 = intersectionpoints(C2, T -- T + (T - S))[0];
+pair X = extension(B, B1, C, C1);
+
+draw(A -- B -- C -- cycle);
+draw(B -- T -- C);
+draw(C -- S);
+draw(T -- A -- S -- B1);
+draw(B1 -- A -- C1, dashed);
+draw(B1 -- X -- C1, blue + dashed);
+draw(X -- A, blue + dashed);
+draw(circumcircle(A, B, C));
+draw(circumcircle(A, B1, C1), blue + dashed);
+draw(C2, blue + dashed);
+
+label("$A$", A, NE);
+label("$B$", B, SW);
+label("$C$", C, SE);
+label("$T$", T, (0, -1));
+label("$S$", S, SE);
+label("$B_1$", B1, SW);
+label("$C_1$", C1, SE);
+label("$X$", X, N);
+\end{asy}
+\end{center}
+
+Notice that $B_1 B C C_1$ are cyclic with diameter $B_1 C_1$ and center $T$. We
+compute $\angle B_1 X C_1$ with respect to this circle, to discover that $\angle
+BXC = \frac{\widehat{B_1 C_1} - \widehat{BC}}{2} = \frac{1}{2} (180 \degree -
+\angle BTC) = \angle BCT = \angle BAC$, so $XBCA$ is cyclic. However, the
+circumcircles of $XBC$ and $X B_1 C_1$ intersect at $A$, so $A$ is the Miquel
+point of $B_1 B C C_1$, which is the center of the spiral similarity that sends
+$BC$ to $B_1 C_1$, so we are done.
+\end{proof}
+\fi
+
+\begin{prb}[China 1992]
+Convex quadrilateral $ABCD$ is inscribed in circle $\omega$ with center $O$.
+Diagonals $AC$ and $BD$ meet at $P$. The circumcenters of triangles $ABP$ and
+$CDP$ meet at $P$ and $Q$. Given that $P, Q, O$ are distinct, show that $\angle
+OQP = 90 \degree$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let's begin with a diagram.
+
+\begin{center}
+\begin{asy}
+size(10.55cm);
+
+pair A = (0, 0);
+pair B = (20, 0);
+pair C = (11, 12);
+
+path omega = circumcircle(A, B, C);
+pair D = intersectionpoints(omega, A -- A + (3, 20))[0];
+pair P = extension(A, C, B, D);
+pair O = circumcenter(A, B, C);
+
+path C1 = circumcircle(A, B, P);
+path C2 = circumcircle(C, D, P);
+pair Q = intersectionpoints(C1, C2)[0];
+pair X = extension(A, D, B, C);
+pair Y = extension(A, B, C, D);
+path C3 = circumcircle(D, X, C);
+path C4 = circumcircle(D, Y, A);
+pair M = intersectionpoints(C3, C4)[0];
+pair M1 = (A + B) / 2;
+pair M2 = (C + D) / 2;
+
+draw(A -- B -- C -- D -- cycle);
+draw(A -- C);
+draw(B -- D);
+draw(O -- Q -- P);
+draw(D -- X -- C, blue + dashed);
+draw(D -- Y -- A, blue + dashed);
+draw(X -- Y, blue + dashed);
+draw(O -- M, blue + dashed);
+draw(X -- P -- Y, blue + dashed);
+draw(O -- M1, red + Dotted);
+draw(O -- M2, red + Dotted);
+draw(subpath(omega, -20, 220));
+draw(subpath(C1, 10, 190), dashed);
+draw(C2);
+draw(C3, blue + dashed);
+draw(C4, blue + dashed);
+
+dot(O);
+
+label("$A$", A, SW);
+label("$B$", B, SE);
+label("$C$", C, NE);
+label("$D$", D, SW);
+label("$P$", P, S);
+label("$X$", X, N);
+label("$Y$", Y, SW);
+label("$M$", M, NW);
+label("$O$", O, SE);
+label("$Q$", Q, SE);
+label("$M_1$", M1, S);
+label("$M_2$", M2, N);
+\end{asy}
+\end{center}
+
+By previous problems, we know that $OM \perp XY$. $Y, P, Q$ are collinear
+because $Y$ is a radical center.
+
+$M$ is the center of the spiral similarity that sends $AB$ to $CD$. Thus $M$
+must also send the midpoints $M_1$ of $AB$ and $M_2$ of $CD$ to each other. Thus
+$Y M_1 M_2 M$ are cyclic. Note that $O$ also lies on this circle. $Q$ is the
+center of the spiral similarity that carries $AB$ to $CD$, so it also carries
+$M_1$ to $M_2$. Compute $\angle Q M_1 B = \angle Q M_2 D$. This gets us $\angle
+Q M_1 O = \angle Q M_2 O$ via subtracting $\angle O M_1 B = \angle O M_2 D = 90
+\degree$, so $Q$ is also in the circle consisting of $O, M_1, M_2$. $OY$ is
+trivially the diameter so $\angle OQP = \angle OQY = 90 \degree$, as desired.
+\end{proof}
+\fi

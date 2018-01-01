@@ -1,0 +1,372 @@
+\begin{prb}[2000 AIME II-4]
+What is the smallest positive integer with six positive odd integer divisors and
+twelve positive even integer divisors?
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Write $n = p_1^{e_1} p_2^{e_2} \cdots$. Then $n$ has $(e_1 + 1)(e_2 + 1) \cdots$
+divisors. Notice that $18 = 2 \cdot 3 \cdot 3$, so $n = p_1 p_2^2 p_3^2$. We
+note that $4 \mid n$, or $n = 2^2 \cdot p_1 \cdot p_2^2$, where $p_1, p_2$ are
+odd primes. The $6$ odd divisors are $1, p_1, p_2, p_1 p_2, p_2^2, p_1 p_2^2$.
+Then the even divisors are just $2$ or $4$ times those. Compute $3^2 \cdot 5 < 3
+\cdot 5^2$, so $n = 4 \cdot 9 \cdot 5 = \boxed{180}$.
+\end{proof}
+\fi
+
+\begin{prb}[2001 AIME I-8]
+Call a positive integer $N$ a $7$-$10$ double if the digits of the base-$7$
+representation of $N$ form a base-$10$ number that is twice $N$. For example,
+$51$ is a $7$-$10$ double because its base-$7$ representation is $102$. What is
+the largest $7$-$10$ double?
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let $a_0, a_1, a_2, \dots, a_n, \dots$ be the digits for the $n$-th power of $7$
+or $10$. The condition in the problem statement then becomes
+\[ a_0 + 10 a_1 + 100 a_2 + \cdots = 2 (a_0 + 7 a_1 + 49 a_2 + \cdots). \]
+Noting that $10^n > 2 \cdot 7^n$ for sufficiently large $n$, we rearrange to get
+\[ a_0 + 4a_1 = 2a_2 + 657 a_3 + \cdots, \]
+where the unwritten terms have coefficients clearly larger than $657$. Notice
+that $a_i < 7$ so if $a_3 > 0$, the equation becomes impossible to solve so $a_3
+= a_4 = \cdots = 0$. Thus we are looking to solve $a_0 + 4a_1 = 2a_2$. Letting
+$a_2 = 6$ will help us maximize our number. Then we want the maximum value of
+$a_1$ such that $a_0 + 4a_1 = 12$ is solveable. Clearly $a_1 = 3$ yields $a_0 =
+0$ and this is maximal, so the answer is $\boxed{630}$.
+\end{proof}
+\fi
+
+\begin{prb}[2014 AIME II-4]
+The repeating decimals $0.abab \overline{ab}$ and $0.abcabc \overline{abc}$
+satisfy
+
+\[ 0.abab \overline{ab} + 0.abcabc \overline{abc} = \frac{33}{37}, \]
+where $a$, $b$, and $c$ are (not necessarily distinct) digits. Find the three
+digit number $abc$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+The first number is just $\frac{10a + b}{99}$ and the second is just $\frac{100a
++ 10b + c}{999}$. Let's clear denominators by multiplying both sides by $999
+\cdot 99$.
+\[ \begin{aligned}
+999 (10a + b) + 99 (100a + 10b + c) &= 33 \cdot 99 \cdot 27 \\
+9990a + 999b + 9900a + 990b + 99c &= 33 \cdot 99 \cdot 27 \\
+1110a + 111b + 1100a + 110b + 11c &= 11^2 \cdot 3^4 \\
+2210a + 221b + 11c &= 11^2 \cdot 3^4. \\
+\end{aligned} \]
+Notice how $221$ appear in both the coefficients for $a$ and $b$, so we can
+learn something about $c \pmod{221}$. Namely, $11c \equiv 77 \pmod{221}$.
+$\gcd(11, 221) = 1$, so we can ``divide'' by $11$ to get $c \equiv 7
+\pmod{221}$, or $c = 7$. Then, subtracting $77$ from both sides and dividing by
+$221$, we obtain $10a + b = 44$, or $a = 4, b = 4$. Our $3$ digit number is then
+$\boxed{447}$.
+\end{proof}
+\fi
+
+\begin{prb}[2015 AMC 10A-23]
+The zeroes of the function $f(x) = x^2 - ax + 2a$ are integers. What is the sum
+of the possible values of $a?$
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+By Vieta, we have $x_1 + x_2 = a$, and $x_1 x_2 = 2a$. Compute $(x_1 - x_2)^2 =
+a^2 - 8a$, so $x = \frac{a \pm \sqrt{a^2 - 8a}}{2}$ is integral, so $a$ and
+$\sqrt{a^2 - 8a}$ must be integral and $a + \sqrt{a^2 - 8a}$ is even. We find
+all $a$ such that $a^2 - 8a = (a - 4)^2 - 16$ is a perfect square. Clearly $16 -
+16 = 0$ and $25 - 16 = 9$ are perfect squares. If $a^2 - 8a$ is a positive
+perfect square then it must correspond to a Pythagorean triple, and $\set{3, 4,
+5}$ is the ``smallest'' triple, with no other primitive triples having a number
+that divides $4$. Thus these are the only solutions. Namely $a - 4 = \pm 4$ and
+$a - 4 = \pm 5$, giving $a = 0, -1, 8, 9$ and $a^2 - 8a = 0, 3, 0, 3$, so all
+the $a$'s work. Compute the sum as $0 - 1 + 8 + 9 = \boxed{16}$.
+\end{proof}
+\fi
+
+\begin{prb}[Simon's Favorite Factoring Trick]
+How many positive integer solutions are there to $a + b + ab = 209$?
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Rewrite the expression as $(a + 1)(b + 1) = 210$. Notice that $210 = 2 \cdot 3
+\cdot 5 \cdot 7$. $210$ has $2 \cdot 2 \cdot 2 \cdot 2 = 16$ different factors,
+and each one contributes towards a value of $a$, and thus $b$. We cannot have $a
+= 0$ or $b = 0$, though, which correspond to the products $1 \cdot 210$ and $210
+\cdot 1$, so the total is $16 - 2 = \boxed{14}$.
+\end{proof}
+\fi
+
+\begin{prb}[1996 AIME-8]
+The harmonic mean of two positive integers is the reciprocal of the arithmetic
+mean of their reciprocals. For how many ordered pairs of positive integers
+$(x, y)$ with $x < y$ is the harmonic mean of $x$ and $y$ equal to $6^{20}$?
+\end{prb}
+
+\ifsolutions
+We let the harmonic mean equal $6^{20}$ and perform some algebraic manipulations
+to get
+\[ \begin{aligned}
+\frac{1}{\dfrac{\dfrac{1}{x} + \dfrac{1}{y}}{2}} &= 6^{20} \\
+\frac{2xy}{x + y} &= 6^{20} \\
+xy - 3^{20} \cdot 2^{19} (x + y) &= 0 \\
+(x - 3^{20} \cdot 2^{19}) (y - 3^{20} \cdot 2^{19}) &= 3^{40} \cdot 2^{38}. \\
+\end{aligned} \]
+We want to factor $3^{40} \cdot 2^{38} = ab$ such that $a < b$ so $x < y$. Thus
+number has $41 \cdot 39 = 1599$ different factors, one of them being the square
+root which leads to $x = y$. Of the solutions with $x \neq y$, either $x > y$ or
+$x < y$ so this is precisely twice the number we want. Hence the answer is just
+$\frac{1599 - 1}{2} = \boxed{799}$.
+\fi
+
+\begin{prb}[2000 AIME I-9]
+The system of equations
+\[ \begin{aligned}
+\log_{10}(2000xy) - (\log_{10}x) (\log_{10}y) &= 4 \\
+\log_{10}(2yz) - (\log_{10}y)(\log_{10}z) &= 1 \\
+\log_{10}(zx) - (\log_{10}z)(\log_{10}x) &= 0 \\
+\end{aligned} \]
+has two solutions $(x_1, y_1, z_1)$ and $(x_2, y_2, z_2)$. Find $y_1 + y_2$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Recall $\log ab = \log a + \log b$. Letting $a = \log x, b = \log y, c = \log z$
+and rewriting everything, we obtain
+\[ \begin{aligned}
+3 + \log 2 + a + b - ab &= 4 \\
+\log 2 + b + c - bc &= 1 \\
+c + a - ca &= 0. \\
+\end{aligned} \]
+This can be arranged to
+\[ \begin{aligned}
+(a - 1)(b - 1) &= \log 2 \\
+(b - 1)(c - 1) &= \log 2 \\
+(c - 1)(a - 1) &= -1, \\
+\end{aligned} \]
+or $(a - 1)(b - 1)(c - 1) = \pm \log 2$. Recall $(c - 1)(a - 1) = -1$, so $b - 1
+= \pm \log 2$, or $\log y = 1 \pm \log 2$, so $y = 20$ or $y = 5$. The sum is
+$20 + 5 = \boxed{025}$.
+\end{proof}
+\fi
+
+\begin{prb}[2001 AIME II-10]
+How many positive integer multiples of $1001$ can be expressed in the form $10^j
+- 10^i$, where $i$ and $j$ are integers and $0 \leq i < j \leq 99$?
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Recall that $1001 = 7 \cdot 11 \cdot 13$, so $7 \cdot 11 \cdot 13 \cdot k = 10^j
+- 10^i = 10^i (10^{j - i} - 1)$. Clearly $1001 \nmid 10^i$, so we need $1001
+\mid 10^{j - i}$. Notice $10^6 - 1 = (10^3 - 1)(10^3 + 1)$ works for obvious
+reasons. Thus we know that $1001 \mid 10^{6n} - 1$, or all $j - i \equiv 0
+\pmod{6}$ work. Now suppose $j - i \equiv a \pmod{6}$ for some $a \neq 0$. Then
+we can write $10^{6n + a} - 1 = 10^{6n} \cdot 10^a - 10^a + 10^a - 1 = 10^a
+(10^{6n} - 1) + (10^a - 1)$. Verify that $1001 \nmid 10^a - 1$ for $a = 1, 2, 3,
+4, 5$, so no other $a$ work. There solutions for $j - i = 6$ are $i = 0$ through
+$i = 93$, of which there are $94$ solutions. Increasing $j - i$ by $6$ decreases
+the number of solutions by $6$. The answer is then the sum
+\[ 94 + 88 + 82 + \cdots + 4 = \frac{16 \cdot 98}{2} = 8 \cdot 98 = \boxed{784}.
+\]
+\end{proof}
+\fi
+
+\begin{prb}[2002 AIME I-14]
+A set $\mathcal{S}$ of distinct positive integers has the following property:
+for every integer $x$ in $\mathcal{S},$ the arithmetic mean of the set of values
+obtained by deleting  $x$ from $\mathcal{S}$ is an integer. Given that $1$
+belongs to $\mathcal{S}$ and that $2002$ is the largest element of
+$\mathcal{S},$ what is the greatest number of elements that $\mathcal{S}$ can
+have?
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Suppose $\mathcal{S}$ has $n$ elements with sum $N$. Then for every element $x
+\in \mathcal{S}$, deleting $x$ yields a sum $N - x$ and the average over $n - 1$
+elements being integral gives us the conditoin $N \equiv x \pmod{n - 1}$. Let's
+delete $1$ because we can. Then $N \equiv 1 \pmod{n - 1}$. This also gives us $x
+\equiv 1 \pmod{n - 1}$, so $2002 \equiv 1 \pmod{n - 1}$, or $n - 1 \mid 2001$,
+where $2001 = 3 \cdot 23 \cdot 29$. $\mathcal{S}$ has $n$ elements of the form
+$x \equiv 1 \pmod{n - 1}$, so the largest element is at least $1 + (n - 1) (n -
+1)$, or $2002 \geq 1 + (n - 1)^2$, or $2001 \geq (n - 1)^2 \implies n - 1 < 45$.
+The largest factor of $2001$ less than $45$ is easily seen to be $29$, so $n - 1
+= 29$ gives us $n = \boxed{030}$.
+\end{proof}
+\fi
+
+\begin{prb}[2006 AIME I-4]
+Let $N$ be the number of consecutive $0$'s at the right end of the decimal
+representation of the product $1! 2! 3! 4! \cdots 99! 100!$. Find the remainder
+when $N$ is divided by $1000$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+The number of $0$'s is the number of factors of $10$. Notice that when computing
+factorials, the number of factors of $2$ are always not less than the number of
+factors of $10$, so it suffices to count the number of factors of $5$. Note that
+$0, 1, 2, 3, 4$ have $0$ factors of $5$, $5, 6, 7, 8, 9$ have $1$ occurrence,
+$10, 11, 12, 13, 14$ have $2$, and so on. Counting in this fashion does not
+count the extra factors of $5$ that come from $25$. The numbers $0$ to $24$ have
+$0$, the numbers $25$ through $49$ have $1$, and so on. Thus the number of
+zeroes is just
+\[ 5(1 + 2 + 3 + \cdots + 19) + 20 + 25(1 + 2 + 3) + 4 = 5 \cdot 190 + 20 + 25
+\cdot 6 + 4 = 1124, \]
+so the answer is $\boxed{124}$.
+\end{proof}
+\fi
+
+\begin{prb}[2010 AIME I-12]
+Let $m \geq 3$ be an integer and $S = \set{3, 4, 5, \dots, m}$. Find the
+smallest value of $m$ such that for every partition of $S$ into two subsets, at
+least one of the subsets contains three integers $a$, $b$, and $c$ (not
+necessarily distinct) such that $ab = c$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+We claim $m \geq 243$. If $m \geq 243$, then it is impossible to partition $3,
+9, 27, 81, 243$ such that the condition is not satisfied. Assume WLOG that the
+partitions are $A$ and $B$ and that $3 \in A$. Then $3 \cdot 3 = 9$ cannot be in
+$A$, so $9 \in B$. $9 \cdot 9 = 81$ cannot be in $B$, so $81 \in A$. If we put
+$27$ into $A$, then $3 \cdot 27 = 81$ is a valid partition so we have to put it
+into $B$. But then $3 \cdot 81 = 27 \cdot 9 = 243$, which must go in either $A$
+or $B$, so the condition must be satisfied for $m \geq 243$.
+
+If $m = 242$, then consider $A = \set{3, 4, 5, 6, 7, 8, 81, 82, \dots, 242}$ and
+$B = \set{9, 10, 11, \dots, 80}$, given by our partition scheme. Clearly no two
+elements of $B$ satisfy the property, and the smaller elements of $A$ also do
+not. $3 \cdot 81 = 243 > 242$, so none of the larger elements satisfy the
+property either. Thus this is a partition of $m = 242$ that does not satisfy the
+property, so the answer is indeed $\boxed{243}$.
+\end{proof}
+\fi
+
+\begin{prb}[1997 JBMO-5]
+Let $n_1, n_2, \dots, n_{1998}$ be positive integers such that
+\[ n_1^2 + n_2^2 + \cdots + n_{1997}^2 = n_{1998}^2. \]
+Show that at least two of these numbers are even.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+If one of $n_1, n_2, \dots, n_{1997}$ are even, then $n_{1998}$ is automatically
+even and vice versa. Thus we show that it is impossible for none of them to be
+even.
+
+Observe that $1^2 \equiv 3^2 \equiv 5^2 \ \equiv 7^2 \equiv 1 \pmod{8}$. If they
+were all odd, then $1997 \equiv 5 \equiv 1 \pmod{8}$, which is clearly not true.
+\end{proof}
+\fi
+
+\begin{prb}[HMMT 2017 A-5]
+Kelvin the Frog was bored in math class one day, so he wrote down all ordered
+triples $(a, b, c)$ of positive integers such that $abc = 2310$ on a sheet of
+paper. Find the sum of all the integers he wrote down. In other words, compute
+\[ \sum_{\mathclap{\substack{abc = 2310 \\ a, b, c \in \NN}}} (a + b + c), \]
+where $\NN$ denotes the positive integers.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+The sum is just $3 \sum_{\mathclap{abc = 2310}} a$ by symmetry reasons. Each
+factor $a$ of 2310 appears $\tau \left(\frac{2310}{a}\right)$ times, where
+$\tau(n)$ denotes the number of factors of $n$. Thus our sum becomes $3
+\sum_{\mathclap{a \mid 2310}} a \cdot \tau \left(\frac{2310}{a}\right)$.
+Consider $f = \mathrm{id} * \tau$, where $\id(n) = n$ and $*$ is Dirichlet
+convolution. $\id$ and $\tau$ are both multiplicative functions so $f$ is
+multiplicative. Notice $f(p) = p + 2$ when $p$ is prime, and $2310 = 2 \cdot 3
+\cdot 5 \cdot 7 \cdot 11$, so $3 \cdot f(2310) = 3(2 + 2)(3 + 2)(5 + 2)(7 +
+2)(11 + 2) = \boxed{49140}$.
+\end{proof}
+\fi
+
+\begin{prb}[HMMT 2017 Guts-27]
+Find the smallest possible value of $x + y$ where $x, y > 1$ and $x$ and $y$ are
+integers that satisfy $x^2 - 29y^2 = 1$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Solving this problem requires a bit of knowledge about the theory behind Pell's
+equation. In particular, one uses the fact that if $p, q$ are relatively prime
+and are solutions to $x^2 - Dy^2 = \pm 1$, then $\frac{p}{q}$ is a convergent of
+$\sqrt{D}$. Verify that
+\[ \sqrt{29} = 5 + \dfrac{1}{2 + \dfrac{1}{1 + \dfrac{1}{1 + \dfrac{1}{2 +
+\dfrac{1}{10 + \dfrac{1}{2 + \cdots}}}}}}, \]
+through some careful computation. The first few convergents are $5,
+\frac{11}{2}, \frac{16}{3}, \frac{27}{5}, \frac{70}{13}$, and that $70^2 - 29
+\cdot 13^2 = -1$. Also note that if $x, y$ are the solutions to $x^2 - Dy^2 =
+-1$, then $x^2 + Dy^2, 2xy$ are solutions to $x^2 - Dy^2 = 1$. We can simply
+compute $(x^2 + Dy^2)^2 - 4x^2 y^2 D = (x^2 - Dy^2)^2$, so $x = 70^2 + 29 \cdot
+13^2 = 9801, y = 2 \cdot 70 \cdot 13 = 1820$ are solutions to the given problem.
+This is clearly the fundamental solution. Thus the answer is $9801 + 1820 =
+\boxed{11621}$.
+\end{proof}
+\fi
+
+The following problem is not meant to be solved, but rather to serve as a
+gateway problem to the beautiful theory that surrounds a certain class of
+objects called elliptic curves, which I find particularly interesting from a
+number theory perspective, especially their use in proving Fermat's Last Theorem
+and modern cryptography. I highly encourage you to read up on the theory of
+elliptic curves if you think this sort of stuff is interesting.
+
+\begin{prb}[Super Challenge Problem]
+Find three positive integers $a, b, c$ such that
+\[ \frac{a}{b + c} + \frac{b}{c + a} + \frac{c}{a + b} = 4. \]
+You can use a calculator for this one, not that it will help until you mostly
+figure the problem out.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+The theory behind this solution is actually very neat, but the computations are
+large so we will mostly give a general overview of how to solve such equations.
+
+The first thing we note is that this equation is homogeneous. That is, if $a, b,
+c$ are solutions then $ka, kb, kc$ are solutions for any $k \neq 0$. In
+particular, this is a projective cubic that expands to
+\[ a^3 + b^3 + c^3 - 3(a^2 b + a b^2 + b^2 c + b c^2 + c^2 a + ca^2) - 5abc = 0.
+\]
+Notice that $a = 1, b = -1, c = 0$ is a solution to this equation, but not a
+solution to the problem statement, but this is good, because it means that this
+curve is an elliptic curve! We turn this curve into Weierstrass form by applying
+the transformations
+\[ \begin{aligned}
+x &= -\frac{28 (a + b + 2c)}{6a + 6b - c} \\
+y &= \frac{364 (a - b)}{6a + 6b - c}, \\
+\end{aligned} \]
+to obtain $y^2 = x^3 + 109 x^2 + 224x$. This also gives rise to the following
+formulas for $a, b, c$.
+\[ \begin{aligned}
+a &= \frac{56 - x + y}{56 - 14x} \\
+b &= \frac{56 - x - y}{56 - 14x} \\
+c &= \frac{-28 - 6x}{28 - 7x}. \\
+\end{aligned} \]
+It is not very easy to find, but easy to verify that $x = -100, y = 260$
+is an integer point on our curve. This yields $a = \frac{2}{7}, b =
+\frac{-1}{14}, c = \frac{11}{14}$. We can clear denominators to get $a = 4, b =
+-1, c = 11$ and verify that this solution works. We can let this $a : b : c$ be
+a point $P$ on our elliptic curve, and use the group law to compute other
+points. In particular, $2P = 9499 : -8784 : 5165$, which is still negative. We
+continue calculating until $9P$, which we find has positive integer solutions
+for $a, b, c$. In particular
+\[ \begin{aligned}
+a &=
+154476802108746166441951315019919837485664325669565431700026634898253202035277999
+\\
+b &=
+36875131794129999827197811565225474825492979968971970996283137471637224634055579
+\\
+c &=
+4373612677928697257861252602371390152816537558161613618621437993378423467772036.
+\\
+\end{aligned} \]
+\end{proof}
+\fi

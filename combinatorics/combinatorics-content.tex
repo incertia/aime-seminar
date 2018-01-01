@@ -1,0 +1,619 @@
+\mathchardef\mh="2D
+
+\begin{prb}[2010 AIME II-10]
+Find the number of second degree polynomials $f(x)$ with integer coefficients
+and integer zeroes for which $f(0) = 2010$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let the roots be $r, s$ such that $f(x) = a(x - r)(x - s)$. We will work with
+the group $S_2$ consisting of two elements, identity and swapping the roots. We
+first factor $2010 = 2 \cdot 3 \cdot 5 \cdot 67$. We count the number of ordered
+triples $(a, r, s)$ by first assigning every copy of each prime to one of the
+three integers, and then picking signs for the first two. This yields $4 \cdot
+3^4 = 324$ possible combinations. Notice that $r$ and $s$ can never be equal
+unless $r = s = \pm 1$, which amount to $2$ solutions. By Burnside's Lemma, the
+number of polynomials is then
+\[ \frac{1}{2} \cdot (324 + 2) = \boxed{163}. \]
+\end{proof}
+\fi
+
+\begin{prb}[1996 AIME]
+Two squares of a $7 \times 7$ checkerboard are painted yellow and the rest
+green. Two paintings are equivalent if one can be obtained by applying a
+rotation to the other. How many inequivalent color schemes are there?
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+There are $\binom{49}{2}$ ways to color two squares yellow. We will apply
+Burnside's Lemma on the additive group of integers modulo $4$. We can think of
+each number as the number of $90 \degree$ rotations made to the board.
+
+$0$ trivially fixes all possible colorings.
+
+$1$ and $3$ fix no colorings after careful examination. This can be determined
+by noting that if a tile is colored off-center, it rotates through $4$ different
+positions, so there must be at least $4$ yellow tiles. There is only one center
+tile so this must be the case.
+
+$2$ fixes all colorings where two tiles are colored in radially opposite
+positions. We cannot color the center, so there are $\frac{49 - 1}{2} = 24$ such
+colorings.
+
+By Burnside's Lemma, there are $\frac{1176 + 0 + 24 + 0}{4} = \boxed{300}$
+unique boards.
+\end{proof}
+\fi
+
+\begin{prb}
+Let $N$ be the number of subsets $\lbrace x, y, z, t \rbrace \subset \NN$
+satisfy $17 \leq x < y < z < t$ and $x + y + z + t = 2018$. Compute the last $3$
+digits of $24N$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Rewrite $x, y, z, t$ as
+\[ \begin{aligned}
+x &= 17 + a \\
+y &= 18 + b \\
+z &= 19 + c \\
+t &= 20 + d. \\
+\end{aligned} \]
+The original equation then becomes $a + b + c + d = 1944$ with $a, b, c, d \in
+\NN_0$. We wish to count the number of such solutions such that $a \leq b \leq c
+\leq d$. Let $X$ be the set of all solutions, and we will let $S_4$ act on this
+set. We classify all $24$ operations of $S_4$ as follows.
+
+\begin{enumerate}
+\item
+The identity permutation. There is $1$ of these. This fixes all $\binom{1944 +
+3}{3}$ solutions.
+\item
+Transpositions ($i \mapsto j \mapsto i$, denoted $(i \; j)$, everything else is
+fixed). There are $1! \cdot \binom{4}{2} = 6$ of these. The number of solutions
+where two values are equal is $1945 + 1943 + 1941 + \cdots + 1 = 973^2$, found
+by taking $a = b = 0, a = b = 1, \dots$.
+\item
+Two disjoint transpositions (e.g. $(1 \; 2) (3 \; 4)$). There are $1! \cdot 1!
+\cdot \frac{1}{2} \binom{4}{2} \binom{2}{2} = 3$ of these. Each one of these has
+solutions of the form $2a + 2b = 1944$, or $a + b = 972$, so there are $973$
+such solutions.
+\item
+A permutation of $3$ elements. There are $2! \cdot \binom{4}{3} = 8$ of these.
+Each of these has $1 + \left\lfloor \frac{1944}{3} \right\rfloor = 649$
+solutions.
+\item
+A permutation of $4$ elements. There are $3! \cdot \binom{4}{4} = 6$ of these.
+$1944$ is a multiple of $4$, so there is indeed a solution where all $4$ values
+are equal.
+\end{enumerate}
+Using Burnside's Lemma, we get
+\[ N = \frac{\binom{1947}{3} + 6 \cdot 973^2 + 3 \cdot 973 + 8 \cdot 649 +
+6}{24}. \]
+Thus
+\[ \begin{aligned}
+24N \pmod{1000} &\equiv 649 \cdot 973 \cdot 945 + 6 \cdot 27^2 - 3 \cdot 27 + 8
+\cdot 649 + 6 \\
+&\equiv 765 + 374 - 81 + 192 + 6 \\
+&\equiv \boxed{256}. \\
+\end{aligned} \]
+\end{proof}
+\fi
+
+\begin{prb}[2010 AMC 12A-25]
+Two quadrilaterals are considered equivalent if one can be obtained by applying
+a rotation and or a translation to the other. How many different convex cyclic
+quadrilaterals are there with integer side lengths and perimeter $32$?
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+We first note that any quadrilateral can be made into a cyclic one by changing
+the angles.
+
+Let $a, b, c, d$ be the side lengths (not necessarily in order) of a cyclic
+quadrilateral with $a + b + c + d = 32$. We consider the group of $4$ side
+permutations after we have assigned each side its length. This is essentially
+``rotating $90 \degree$.'' Notice that we do not need to consider swapping
+sides (given by $S_4$), as it does not yield a rotation or translation.
+
+Doing nothing fixes all cyclic quadrilaterals. Assume WLOG $a \leq b \leq c \leq
+d$. We require $d \leq 15$ for triangle inequality reasons. There are
+$\binom{31}{3}$ ways of partitioning $32$, and we will subtract out the cases
+for $d > 15$. Namely, there are $\binom{31 - d}{2}$ ways of partitioning $a + b
++ c = 32 - d$. There are $\binom{15}{2} + \binom{14}{2} + \cdots + \binom{2}{2}
+= \binom{16}{3}$ such partitions. We then subtract $4$ times this number because
+$a$ can be any of the four side lengths. The number of cyclic quadrilaterals is
+$\binom{31}{3} - 4 \cdot \binom{16}{3} = 4495 - 2240 = 2255$.
+
+Rotating once only fixes squares. There is only one square of side length $8$.
+
+Rotating twice only fixes rectangles. There are $15$ such rectangles.
+
+Rotating three times only fixes squares. There is only one square of side length
+$8$.
+
+Utilizing Burnside's Lemma, the number of unique quadrilaterals is $\frac{2255 +
+1 + 15 + 1}{4} = \boxed{568}$.
+\end{proof}
+\fi
+
+\begin{prb}[Catalan Numbers]
+Consider a $n \times n$ grid. Compute the number of paths from $(0, 0)$ to $(n,
+n)$ such that for every point $(x, y)$ on the path, $x \geq y$. Let this number
+be $C_n$.
+
+Show that $C_n$ is also the number of
+\begin{enumerate}[(i)]
+\item
+$n$ pairs of parentheses being correctly matched.
+\item
+full binary trees (every node either has $0$ or $2$ children) with $n + 1$
+leaves.
+\item
+ways to cut a convex polygon with $n + 2$ sides into triangles with non-crossing
+line segments.
+\item
+binary trees with $n$ vertices.
+\item
+ways to tile a staircase of height $n$ with $n$ rectangles.
+\end{enumerate}
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+There are clearly $\binom{2n}{n}$ paths without the condition. Consider the
+first time an invalid path reaches above the diagonal, at some point $(x, x +
+1)$. To get to $(n, n)$, it must take $n - x$ rightward steps and $n - x - 1$
+upwards steps. We reflect the remaining path over the line $y = x + 1$. This new
+path makes $n - x - 1$ rightward steps and $n - x$ upwards steps, and ends on
+$(n - 1, n + 1)$. Notice that all bad paths must touch $y = x + 1$ and all paths
+to $(n - 1, n + 1)$ also touch $y = x + 1$, and the same ``flipping'' process
+can be performed to obtain a bad path. Hence this precisely enumerates the bad
+paths, of which there are $\binom{2n}{n - 1}$ of. We then compute
+\[ \begin{aligned}
+C_n &= \binom{2n}{n} - \binom{2n}{n - 1} \\
+&= \frac{(2n)!}{n! \cdot n!} - \frac{(2n)!}{(n - 1)! \cdot (n + 1)!} \\
+&= \frac{(2n)!}{n! \cdot (n - 1)!} \left( \frac{1}{n} - \frac{1}{n + 1} \right)
+\\
+&= \frac{(2n)!}{n! \cdot (n - 1)!} \left( \frac{n + 1 - n}{n \cdot (n + 1)}
+\right) \\
+&= \frac{1}{n + 1} \binom{2n}{n}.
+\end{aligned} \]
+
+We then biject as follows.
+\begin{enumerate}[(i)]
+\item
+Go right on left parentheses, go up on right parentheses.
+\item
+Consider an in order traversal of the tree (left, node, right). Every time we go
+left, go right. Every time we go right, go up.
+\item
+Connect the centers of two triangles if they share an edge. This forms a binary
+tree with $n$ vertices.
+\item
+Add a leaf to every node that does not already have a left and right subtree.
+This becomes a full binary tree.
+\item
+We orient our staircase as follows. The first column has length $n$, the second
+has $n - 1$, etc. Start at the top right ``block''. It belongs to a rectangle.
+If the left edge touches a rectangle that has not been touched, connect the two.
+If the bottom edge touches a rectangle, it must be untouched and connect the
+two. This is a binary tree with $n$ vertices.
+\end{enumerate}
+\end{proof}
+\fi
+
+\begin{prb}
+Determine the number of ways of filling a $2 \times n$ matrix with the numbers
+$1, 2, \dots, 2n$ such that each row and each column has increasing entries.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+We can always get a valid matrix by filling it with $1, 2, \dots, 2n$ in that
+order in the following manner:
+
+\begin{enumerate}[(i)]
+\item
+If the top row contains an equal number of filled entries as the bottom row,
+fill the top.
+\item
+Otherwise, fill any row.
+\end{enumerate}
+This guarantees that each row and column is increasing and not following this
+process guarantees some column is decreasing. This is easily seen as a bijection
+to writing left parentheses when filling the top and writing right parentheses
+for filling the bottom, yielding $n$ sets of correctly formatted parentheses,
+which we know is $C_n = \frac{1}{n + 1} \binom{2n}{n}$.
+\end{proof}
+\fi
+
+\begin{prb}[Vandermonde]
+Prove that
+\[ \binom{n + m}{k} = \sum_{i = 0}^k \binom{n}{i} \binom{m}{k - i}. \]
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Examine coefficients of $(1 + x)^{m + n} = (1 + x)^m (1 + x)^n$. In particular,
+look at the coefficient of $x^k$.
+\end{proof}
+\fi
+
+\begin{prb}
+Compute the sum
+\[ \binom{2018}{0} + \binom{2018}{3} + \binom{2018}{6} + \cdots +
+\binom{2018}{2016}. \]
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Let $\omega$ be a primitive 3rd root of unity, so it satisfies $1 + \omega +
+\omega^2 = 0$. Notice how
+\[ (1 + \omega)^{2018} = \binom{2018}{0} + \binom{2018}{1} \omega +
+\binom{2018}{2} \omega^2 + \binom{2018}{3} + \cdots + \binom{2018}{2016} +
+\binom{2018}{2017} \omega + \binom{2018}{2018} \omega^2. \]
+We can do the same with $\omega^2$.
+\[ (1 + \omega^2)^{2018} = \binom{2018}{0} + \binom{2018}{1} \omega^2 +
+\binom{2018}{2} \omega + \binom{2018}{3} + \cdots + \binom{2018}{2016} +
+\binom{2018}{2017} \omega^2 + \binom{2018}{2018} \omega. \]
+We can also do the same thing with $(1 + 1)^{2018}$ to get $1 + \omega +
+\omega^2$ in the every slot that is not divisible by $3$ once we add everything
+up. This is $3$ times the sum. Additionally, recall that $1 + \omega =
+-\omega^2$ and $1 + \omega^2 = -\omega$. Thus, the value of the sum is
+\[ \begin{aligned}
+\frac{1}{3} \left( 2^{2018} + (-\omega^2)^{2018} + (-\omega)^{2018} \right) &=
+\frac{1}{3} \left( 2^{2018} + \omega + \omega^2 \right) \\
+&= \boxed{\frac{1}{3} \left(2^{2018} - 1\right)}.
+\end{aligned} \]
+\end{proof}
+\fi
+
+\begin{prb}[HMMT 2007 C-4]
+On the Cartesian grid, Johnny wants to travel from $(0, 0)$ to $(5, 1)$, passing
+through all twelve points of the rectangle $S = \set{(i, j) : 0 \leq i \leq 5, 0
+\leq j \leq 1, i, j \in \ZZ}$. Each step, Johnny can go from one point in $S$ to
+another in $S$ via a line segment connecting the two points. How many ways are
+there for Johnny to start at $(0, 0)$ and end at $(5, 1)$ so that he never
+crosses his own path?
+
+\begin{center}
+\begin{asy}
+size(5cm);
+for (int i = 0; i <= 5; ++i) {
+  for (int j = 0; j <= 1; ++j) {
+    dot((i, j));
+  }
+}
+
+draw((0, 0) -- (0, 1) -- (1, 1) -- (2, 1) -- (3, 1) -- (1, 0) -- (2, 0) -- (3,
+0) -- (4, 0) -- (4, 1) -- (5, 0) -- (5, 1));
+\end{asy}
+\end{center}
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Notice that we must traverse $(0, 0), (1, 0), \dots, (5, 0)$ from left to right,
+otherwise we will have an intersection. The same follows for $(0, 1), (1, 1),
+\dots, (5, 1)$. Thus the number of paths is just $\binom{10}{5} = \boxed{252}$.
+\end{proof}
+\fi
+
+\begin{prb}[2014 HMMT C-2]
+There are $10$ people who want to choose a committee of $5$ people. They do this
+by first selecting $1$, $2$, $3$, or $4$ committee leaders, who then choose
+among the remaining people to complete the $5$-person commmittee. How many ways
+can the committee be formed, assuming that people are distinguishable? (If two
+committees have the same people but different leaders, then they are distinct.)
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+There are $\binom{10}{5} = 252$ ways of selecting $5$ people. We then need to
+assign committee leaders to each selection. Each member is either a leader or
+not, which yields $2^5$ possible selections, but they cannot all be leaders and
+they cannot all be non-leaders, so we subtract $2$ to count the number of ways
+leaders can be chosen. Then answer is then $30 \cdot 252 = \boxed{7560}$.
+\end{proof}
+\fi
+
+\begin{prb}[2013 AIME II-9]
+A $7 \times 1$ board is completely covered by $m \times 1$ tiles without
+overlap; each tile may cover any number of consecutive squares, and each tile
+lies completely on the board. Each tile is either red, blue, or green. Let $N$
+be the number of tilings of the $7 \times 1$ board in which all three colors are
+used at least once. For example, a $1 \times 1$ red tile followed by a $2 \times
+1$ green tile, a $1 \times 1$ green tile, a $2 \times 1$ blue tile, and a $1
+\times 1$ green tile is a valid tiling. Note that if the $2 \times 1$ blue tile
+is replaced by two $1 \times 1$ blue tiles, this results in a different tiling.
+Find the remainder when $N$ is divided by $1000$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+We list out how many ways we can tile the board with $n$ tiles, as well as how
+many ways we can color them.
+
+\begin{center}
+\begin{tabular}{c | c | c}
+$n$ & tilings & colorings \\ \hline
+3 & 15 & 6 \\
+4 & 20 & 36 \\
+5 & 15 & 150 \\
+6 & 6 & 540 \\
+7 & 1 & 1806 \\
+\end{tabular}
+\end{center}
+
+The number of ways to tile with $n$ tiles is simply $\binom{6}{n}$ and then the
+number of colorings is PIE given by $3^n - 3 \cdot 2^n + 3$ with colorings with
+$3$ colors, all $3$ colorings with $2$ colors, and the $3$ colorings with a
+single color. Then compute, $15 \cdot 6 + 20 \cdot 36 + 15 \cdot 150 + 6 \cdot
+540 + 1 \cdot 1806 = 8106$, so the answer is $\boxed{106}$.
+\end{proof}
+\fi
+
+\begin{prb}
+Determine the number of ways to stack coins in the plane such that the bottom
+row consists of $n$ consecutive coins. For example, there are $5$ ways for the
+case $n = 3$.
+
+\begin{center}
+\begin{asy}
+size(10cm);
+
+draw(circle((0, 0), 1));
+draw(circle((2, 0), 1));
+draw(circle((4, 0), 1));
+
+draw(circle((8, 0), 1));
+draw(circle((10, 0), 1));
+draw(circle((12, 0), 1));
+draw(circle((9, sqrt(3)), 1));
+
+draw(circle((16, 0), 1));
+draw(circle((18, 0), 1));
+draw(circle((20, 0), 1));
+draw(circle((19, sqrt(3)), 1));
+
+draw(circle((24, 0), 1));
+draw(circle((26, 0), 1));
+draw(circle((28, 0), 1));
+draw(circle((25, sqrt(3)), 1));
+draw(circle((27, sqrt(3)), 1));
+
+draw(circle((32, 0), 1));
+draw(circle((34, 0), 1));
+draw(circle((36, 0), 1));
+draw(circle((33, sqrt(3)), 1));
+draw(circle((35, sqrt(3)), 1));
+draw(circle((34, 2 * sqrt(3)), 1));
+\end{asy}
+\end{center}
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+We turn every circle into a rotated square.
+
+\begin{center}
+\begin{asy}
+size(10cm);
+
+pen bb = blue + 1.5;
+
+path sq(pair c, real r) {
+  path p = (0, r) -- (r, 0) -- (0, -r) -- (-r, 0) -- cycle;
+  return shift(c) * scale(r) * p;
+}
+
+draw(sq((0, 0), 1));
+draw(sq((2, 0), 1));
+draw(sq((4, 0), 1));
+draw((-1, 0) -- (0, 1) -- (1, 0) -- (2, 1) -- (3, 0) -- (4, 1) -- (5,  0),
+bb);
+
+draw(sq((8, 0), 1));
+draw(sq((10, 0), 1));
+draw(sq((12, 0), 1));
+draw(sq((9, 1), 1));
+draw((7, 0) -- (8, 1) -- (9, 2) -- (10, 1) -- (11, 0) -- (12, 1) -- (13,  0),
+bb);
+
+draw(sq((16, 0), 1));
+draw(sq((18, 0), 1));
+draw(sq((20, 0), 1));
+draw(sq((19, 1), 1));
+draw((15, 0) -- (16, 1) -- (17, 0) -- (18, 1) -- (19, 2) -- (20, 1) -- (21,  0),
+bb);
+
+draw(sq((24, 0), 1));
+draw(sq((26, 0), 1));
+draw(sq((28, 0), 1));
+draw(sq((25, 1), 1));
+draw(sq((27, 1), 1));
+draw((23, 0) -- (24, 1) -- (25, 2) -- (26, 1) -- (27, 2) -- (28, 1) -- (29,  0),
+bb);
+
+draw(sq((32, 0), 1));
+draw(sq((34, 0), 1));
+draw(sq((36, 0), 1));
+draw(sq((33, 1), 1));
+draw(sq((35, 1), 1));
+draw(sq((34, 2), 1));
+draw((31, 0) -- (32, 1) -- (33, 2) -- (34, 3) -- (35, 2) -- (36, 1) -- (37,  0),
+bb);
+\end{asy}
+\end{center}
+The answer is thus $C_n$.
+\end{proof}
+\fi
+
+\begin{prb}[HMMT 2007 C-10]
+A subset $S$ of the non-negative integers is called \emph{supported} if it
+contains $0$, and for all $k \in S$, $k + 8, k + 9 \in S$. How many supported
+sets are there?
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+One easily notes that $S \supseteq \set{0, 8, 9, 16, 17, 18, 24 \, \mh \, 27, 32
+\, \mh \, 36, 40 \, \mh \, 45, 48 \, \mh \, 54, 56 \, \mh \, {+\infty}}$. We
+organize the members of $S' = \ZZ_0^+ \setminus S$ as follows.
+
+\begin{center}
+\begin{asy}
+size(10cm);
+
+for (int i = 0; i <= 16; i += 2) {
+  label("*", (i, 0));
+}
+for (int i = 1; i <= 15; i += 2) {
+  label("*", (i, 1));
+}
+for (int j = 7; j >= 1; j -= 1) {
+  for (int i = 1; i <= j; i += 1) {
+    label(string(9 * (7 -  j) + i), (2 * i + 7 - j, 9 - j));
+  }
+}
+\end{asy}
+\end{center}
+
+Notice that every path that starts at the bottom left ending at the bottom
+right, moving only diagonally up and diagonally down, carves out a $S'$. Namely,
+if we let $S$ contain, say $29$, then $S$ also contains $37, 38, 46, 47, 55$,
+and this corresponds to the path
+\[ 1 \to 10 \to 19 \to 28 \to 20 \to 12 \to 21 \to 30 \to 39 \to 31 \to 23 \to
+15 \to 7. \]
+Therefore the number of supported sets corresponds to the number of valid paths,
+which is easily bijected to valid sets of parentheses, so the answer is
+\[ C_8 = \frac{1}{9} \binom{16}{8} = \boxed{1430}. \]
+\end{proof}
+\fi
+
+\begin{prb}[HMMT 2014 C-6]
+We have a calculator with two buttons that displays an integer $x$. Pressing the
+first button replaces $x$ with $\left\lfloor \frac{x}{2} \right\rfloor$, and
+pressing the second button replaces $x$ with $4x + 1$. How many integers less
+than or equal to $2014$ can be achieved through a sequence of arbitrary button
+presses? (It is permitted for the number displayed to exceed $2014$ during the
+sequence.)
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Consider what the calculator does in binary. Pressing the first button truncates
+the last digit and pressing the second button appends $01$ to the rightmost
+side. Thus, the calculator is only able to display any binary string that does
+not contain the substring $11$, as our insertion primitives consist of inserting
+``0'' and inserting ``01''.
+
+Let $F_n$ denote the number of valid strings of length $n$. If $x$ is a valid
+string of length $n - 1$, then $x0$ is a valid string of length $n$. If $x$ is a
+valid string of length $n - 2$, then $x01$ is a valid string of length $n$. This
+clearly enumerates all valid strings, so we get the recurrence $F_n = F_{n - 1}
++ F_{n - 2}$ with $F_1 = 2$ and $F_2 = 3$. Notice that $2014 = 11111011110_2$,
+which has $11$ digits, and the maximum valid string with $11$ digits is
+$10101010101_2 = 1365$, so $F_{11}$ counts all of these and nothing more. Doing
+some computation yields $F_{11} = \boxed{233}$.
+\end{proof}
+\fi
+
+\begin{prb}[2001 AIME I-15]
+The numbers $1$, $2$, $3$, $4$, $5$, $6$, $7$, and $8$ are randomly written on
+the faces of a regular octahedron so that each face contains a different number.
+The probability that no consecutive numbers (here we regard $8$ and $1$ to be
+consecutive) are written on faces that share an edge is $\frac{m}{n}$, where $m$
+and $n$ are relatively prime positive integers. Find $m + n$.
+\end{prb}
+
+\ifsolutions
+\begin{proof}[Solution]
+Consider the cube formed by joining the faces of the octahedron. The edges of
+the cube represent the faces of the octahedron that share an edge.
+
+\begin{center}
+\begin{asy}
+settings.render=0;
+settings.prc=false;
+size(6cm);
+import three;
+draw((0, 0, 0) -- (0, 0, 1) -- (0, 1, 1) -- (1, 1, 1) -- (1, 0, 1) -- (1, 0, 0)
+-- (1, 1, 0) -- (0, 1, 0) -- (0, 0, 0));
+draw((1, 0, 1) -- (0, 0, 1));
+draw((1, 0, 0) -- (0, 0, 0));
+draw((1, 1, 0) -- (1, 1, 1));
+draw((0, 1, 0) -- (0, 1, 1));
+for (int i = 0; i < 2; ++i) {
+  for (int j = 0; j < 2; ++j) {
+    for (int k = 0; k < 2; ++k) {
+      dot((i, j, k));
+    }
+  }
+}
+\end{asy}
+\end{center}
+
+An assignment of each number to each vertex corresponds to a Hamiltonian cycle
+on the graph of diagonals of this cube, by walking the paths defined by $1 \to
+2, 2 \to 3$, etc. We are interested in the number of these graphs. Notice that
+the diagonals of length $\sqrt{2}$ form two tetrahedrons with no common vertex
+and the diagonals of length $\sqrt{3}$ join the vertices of each tetrahedron. We
+can then ``flatten'' the graphs of the two tetrahedrons into squares and connect
+the vertices like so.
+
+\begin{center}
+\begin{asy}
+settings.render=0;
+settings.prc=false;
+size(6cm);
+import three;
+draw((0, 0, 0) -- (0, 0, 1) -- (0, 1, 1) -- (1, 1, 1) -- (1, 0, 1) -- (1, 0, 0)
+-- (1, 1, 0) -- (0, 1, 0) -- (0, 0, 0));
+draw((1, 0, 1) -- (0, 0, 1));
+draw((1, 0, 0) -- (0, 0, 0));
+draw((1, 1, 0) -- (1, 1, 1));
+draw((0, 1, 0) -- (0, 1, 1));
+draw((0, 0, 0) -- (1, 1, 0));
+draw((0, 1, 0) -- (1, 0, 0));
+draw((0, 0, 1) -- (1, 1, 1));
+draw((0, 1, 1) -- (1, 0, 1));
+for (int i = 0; i < 2; ++i) {
+  for (int j = 0; j < 2; ++j) {
+    for (int k = 0; k < 2; ++k) {
+      dot((i, j, k));
+    }
+  }
+}
+\end{asy}
+\end{center}
+
+In order to complete a Hamiltonian cycle, we must use the vertical edges either
+two or four times.
+
+To form a path using four vertical edges, we must alternate between vertical and
+flat edges. We first pick two vertices from the top square and draw their edges
+downwards. From there, we can visit the other two unvisited vertices in $2$
+ways. Then we must draw edges back up, and connect back to our original vertices
+in $1$ way (the other way forms two squares). There are $\binom{4}{2} = 6$ ways
+of picking the first two vertices, and each of these ``octagons'' correspond to
+$8 \cdot 2$ different labellings of the dice. There are then $8 \cdot 6 \cdot 2
+= 96$ such octagons.
+
+To form a path using two vertical edges, we have two sets of $1$ vertical and
+$3$ flat edges. Pick two vertices on the top square and draw their vertical
+edges. For each of the top and bottom squares, there are $2$ different ways of
+completing the path that starts at one vertex and ends at the other. Each of
+these octagons also correspond to $8 \cdot 2$ different labellings. Thus, there
+are $8 \cdot 6 \cdot 2 \cdot 2 \cdot 2 = 384$ octagons formed in this manner.
+
+There are $8! = 40320$ different labellings of the dice, so the probability is
+$\frac{96 + 384}{40320} = \frac{480}{40320} = \frac{1}{84}$, so the answer is $1
++ 84 = \boxed{085}$.
+\end{proof}
+\fi
